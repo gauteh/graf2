@@ -1,0 +1,4 @@
+*.swp
+*.o
+graf
+.sconsign*
