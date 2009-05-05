@@ -21,6 +21,8 @@ int main () {
     const int SCREEN_HEIGHT = 640;
     const int SCREEN_BPP = 32;
 
+    const char *filename = "GRAF.DAT";
+
     if (SDL_Init (SDL_INIT_EVERYTHING) == -1) {
         cout << "Failed to setup SDL!\n";
         return 0;
@@ -33,9 +35,11 @@ int main () {
         return 0;
     }
 
-    SDL_WM_SetCaption ("Graf - v" VERSION " - 2009 (c) Gaute Hope", NULL);
+    SDL_WM_SetCaption ("Graf - v" VERSION, NULL);
 
         
+    Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP); // init and setup graf, this runs the main application
+
     SDL_Quit ();
     return 0;
 }

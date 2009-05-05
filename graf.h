@@ -3,41 +3,53 @@
  */
 
 # pragma once
+# include <string>
+# include <SDL/SDL.h>
 
-class Axis {
+# include "sdlmisc.h"
+# include "plot.h"
+
+class Axis : public SDL_Item {
     private:
-        SDL_Surface surface;
-        SDL_Rect rect;
-
+        string label;
         float start;
         float stop;
         float increment;
+        int direction; // 0 = vertical, 1 = horizontal
+        Uint32 color;
 
     public:
+        Axis ();
         Axis (float, float, float);
         void set_start (float);
         void set_stop (float);
         void set_inc (float);
 
+        void set_label (string s);
+        void set_direction (int);
+        int get_direction ();
+
+        void set_color (Uint32);
+        Uint32 get_color ();
+
         void draw ();
-        SDL_Surface *get_surface ();
-        SDL_Rect *get_rect ();
-        void set_rect (SDL_Rect *);
 };
 
-class Graf {
+class Graf : public SDL_Item {
     private:
-        SDL_Surface surface;
-        SDL_Rect rect;
+        int SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP;
+        const char* filename;
 
-        Axis x_axis;
-        Axis y_axis;
+        Axis axis_x;
+        Axis axis_y;
+
+        vector<Plot> plots; // array of plots
 
     public:
-        Graf ();
-        
+        Graf (SDL_Surface*, const char*, int, int, int);
+        int run ();
         void draw ();
-        SDL_Surface *get_surface ();
-        SDL_Rect *get_rect ();
+
+        bool read ();
 };
 

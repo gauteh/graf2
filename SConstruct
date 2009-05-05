@@ -9,6 +9,7 @@ for k, v in dependencies.iteritems():
 		env.ParseConfig ('pkg-config --cflags --libs ' + k)
 		
 env.Append (LIBS = 'SDL_ttf')
+env.Append (CXXFLAGS = '-g')
 
 source_files = [
 	'main.cpp',
