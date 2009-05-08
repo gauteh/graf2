@@ -96,12 +96,14 @@ void Graf::draw () {
     // draw plots
     vector<Plot>::iterator iter;
     for (iter = plots.begin (); iter != plots.end(); iter++) {
-        iter->draw ();
         SDL_Rect *r = iter->get_rect ();
         r->h = SCREEN_HEIGHT - 30;
         r->w = SCREEN_WIDTH - 30;
         r->x = 30;
-        r->y = 30;
+        r->y = SCREEN_HEIGHT - 30;
+        iter->set_screen (surface);
+
+        iter->draw ();
         SDL_Surface *s = iter->get_surface ();
 
         apply_surface (r->x, r->y, s, surface);

@@ -5,8 +5,11 @@
  * SDL_Item class, common members and functions of SDL objects
  */
 
+# include <iostream>
 # include <SDL/SDL.h>
 # include "sdlmisc.h"
+
+using namespace std;
 
 void apply_surface (int x, int y, SDL_Surface *source, SDL_Surface *destination) {
     SDL_Rect offset;
