@@ -21,6 +21,7 @@ class SDL_Item {
         SDL_Rect rect;
     public:
         virtual void draw ();
+        void setup_surface ();
         SDL_Surface *get_surface ();
         SDL_Rect *get_rect ();
         void set_rect (SDL_Rect *);

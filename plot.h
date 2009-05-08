@@ -20,6 +20,7 @@ class Plot : public SDL_Item {
 
     public:
         Plot ();
+        void draw ();
         void set_label (string s);
         void add_point (float, float);
         int get_points ();

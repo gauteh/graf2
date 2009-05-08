@@ -40,8 +40,16 @@ void SDL_Item::set_screen (SDL_Surface *s) {
     screen = s;
 }
 
+void SDL_Item::setup_surface () {
+    if (surface == NULL) {
+        surface = SDL_CreateRGBSurface (SDL_SRCCOLORKEY, rect.w, rect.h, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);        
+        SDL_SetColorKey (surface, SDL_SRCCOLORKEY, 0x00);
+    }
+}
+
 void SDL_Item::draw () {
     // empty
+    setup_surface ();
 }
 
 void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
@@ -51,7 +59,10 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
         for (int i = 0; i < s->w; i++) {
             for (int j = 0; j < s->h; j++) {
                 if (i == x2) {
-                    put_pixel32 (s, i, j, pixel);
+                    if ((j > y1) && ( j < y2)) 
+                        put_pixel32 (s, i, j, pixel);
+                    if ((j < y1) && (j > y2)) 
+                        put_pixel32 (s, i, j, pixel);
                 }
             }
         }
@@ -60,7 +71,10 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
         for (int i = 0; i < s->w; i++) {
             for (int j = 0; j < s->h; j++) {
                 if (j == y2) {
-                    put_pixel32 (s, i, j, pixel);
+                    if ((j > x2) && (j < x1))
+                        put_pixel32 (s, i, j, pixel);
+                    if ((j < x2) && (j > x1))
+                        put_pixel32 (s, i, j, pixel);
                 }
             }
         }
@@ -71,10 +85,8 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
         
         for (int i = 0; i < s->w; i++) {
             for (int j = 0; j < s->h; j++) {
-                //put_pixel32 (s, i, j, WHITE);
-                if ((j == (a*i + b)) && (i > x1) && (i < x2)) {
-                    put_pixel32 (s, i, j, pixel);
-                }
+                // TODO: 
+                put_pixel32 (s, i, j, pixel);
             }
         }
     }

@@ -44,3 +44,22 @@ float Plot::get_min () {
 
     return min;
 }
+
+void Plot::draw () {
+    setup_surface ();
+    float inc_x = rect.w / points;
+    float inc_y = rect.h / (get_max () - get_min ());
+
+    int n_x = 0;
+    int n_y = 0;
+    vector<float>::iterator i_x;
+    vector<float>::iterator i_y;
+    i_y = y.begin ();
+    // assume there exists equally many y's as x's
+    //for (i_x = x.begin(); i_x != x.end (); i_x++) {
+        //float t = *(i_y);
+        //put_pixel32 (surface, n_x * inc_x, rect.h - (t * inc_y), WHITE);
+        //i_y++;
+        //n_x++;
+    //}
+}

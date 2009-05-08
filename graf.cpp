@@ -39,11 +39,7 @@ void Axis::set_color (Uint32 c) { color = c; }
 Uint32 Axis::get_color () { return color; }
 
 void Axis::draw () {
-    if (surface == NULL) {
-        surface = SDL_CreateRGBSurface (SDL_SRCCOLORKEY, rect.w, rect.h, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);        
-        SDL_SetColorKey (surface, SDL_SRCCOLORKEY, 0x00);
-    }
-    
+    setup_surface (); 
     if (direction) {
         draw_line (surface, rect.w / 2, 0, rect.w / 2, rect.h, color);
     } else {
@@ -93,14 +89,23 @@ void Graf::draw () {
 
     axis_x.draw ();
     axis_y.draw ();
-    
 
-    apply_surface (axis_x.get_rect()->x, axis_x.get_rect()->y, axis_x.get_surface (), get_surface ());
-    apply_surface (axis_y.get_rect()->x, axis_y.get_rect()->y, axis_y.get_surface (), get_surface ());
+    apply_surface (axis_x.get_rect()->x, axis_x.get_rect()->y, axis_x.get_surface (), surface);
+    apply_surface (axis_y.get_rect()->x, axis_y.get_rect()->y, axis_y.get_surface (), surface);
 
     // draw plots
+    vector<Plot>::iterator iter;
+    for (iter = plots.begin (); iter != plots.end(); iter++) {
+        iter->draw ();
+        SDL_Rect *r = iter->get_rect ();
+        r->h = SCREEN_HEIGHT - 30;
+        r->w = SCREEN_WIDTH - 30;
+        r->x = 30;
+        r->y = 30;
+        SDL_Surface *s = iter->get_surface ();
 
-
+        apply_surface (r->x, r->y, s, surface);
+    }
 }
 
 int Graf::run () {
