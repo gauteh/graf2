@@ -40,13 +40,14 @@ Uint32 Axis::get_color () { return color; }
 
 void Axis::draw () {
     if (surface == NULL) {
-        surface = SDL_CreateRGBSurface (SDL_SRCCOLORKEY, rect.w, rect.h, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);        
+        surface = SDL_CreateRGBSurface (SDL_SRCCOLORKEY, rect.w, rect.h, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);        
+        SDL_SetColorKey (surface, SDL_SRCCOLORKEY, 0x00);
     }
     
     if (direction) {
-        draw_line (surface, 0, rect.h / 2, rect.w, rect.h / 2, color);
-    } else {
         draw_line (surface, rect.w / 2, 0, rect.w / 2, rect.h, color);
+    } else {
+        draw_line (surface, 0, rect.h / 2, rect.w, rect.h / 2, color);
     }
 }
 
@@ -104,8 +105,24 @@ void Graf::draw () {
 
 int Graf::run () {
     // events
+    SDL_Event event;
+    int run = 1;
+
+    while (run) {
+        while (SDL_PollEvent (&event)) {
+            switch (event.type) {
+                case SDL_KEYDOWN:
+                case SDL_PRESSED:
+                    switch (event.key.keysym.sym) {
+                        case SDLK_q:
+                            cout << "'Q' pressed, Goodbye!\n";
+                            run = 0;
+                            break;
+                    }
+            }
+        }
+    }
     
-    sleep (3);
     return 0;
 }
 
@@ -127,7 +144,7 @@ bool Graf::read () {
     float t_start = t;
 
     while (!data.eof ()) {
-        cout << "t=" << t << ", x=" << x << ", y=" << y << endl;
+        //cout << "t=" << t << ", x=" << x << ", y=" << y << endl;
         a.add_point (t, x);
         b.add_point (t, y);
 

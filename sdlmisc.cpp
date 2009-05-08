@@ -46,20 +46,24 @@ void SDL_Item::draw () {
 
 void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
     // alle punkt på ei linje følger likninga y = ax + b
-    if (x2 - x1 == 0) {
+    if ((x2 - x1) == 0) {
         // vertical
-        int i = 0;
-        while (i < (s->w * s->h)) {
-            if ((s->h - (i / s->w)) > y1 && (s->h - (i / s->w)) < y2) {
-                put_pixel32 (s, i, 0, pixel);
-
-            } else if ((s->h - (i / s->w)) < y1 && (s->h - (i / s->w)) > y2) {
-                put_pixel32 (s, i, 0, pixel);
+        for (int i = 0; i < s->w; i++) {
+            for (int j = 0; j < s->h; j++) {
+                if (i == x2) {
+                    put_pixel32 (s, i, j, pixel);
+                }
             }
-            i++;
         }
-    } else if (y2 - y1 == 0) {
+    } else if ((y2 - y1) == 0) {
         // horizontal
+        for (int i = 0; i < s->w; i++) {
+            for (int j = 0; j < s->h; j++) {
+                if (j == y2) {
+                    put_pixel32 (s, i, j, pixel);
+                }
+            }
+        }
     } else {
         int a, b;
         a = (y2 - y1)/(x2 - x1);
