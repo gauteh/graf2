@@ -151,6 +151,7 @@ bool Graf::read () {
     axis_x.set_start (t_start);
     axis_x.set_stop (t_end);
     axis_x.set_inc (inc);
+    axis_x.set_direction (1); 
     axis_x.set_label ("tid (s)");
 
     // finn maks
@@ -170,6 +171,7 @@ bool Graf::read () {
     }
 
     inc = (t_end - t_start) / i;
+    axis_y.set_direction (0);
     axis_y.set_start (min);
     axis_y.set_stop (max);
     axis_y.set_inc (inc);
