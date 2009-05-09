@@ -1,14 +1,8 @@
 env = Environment ()
 
-dependencies = {
-	'sdl' : 'pkg-config'
-	}
-
-for k, v in dependencies.iteritems():
-	if v == 'pkg-config':
-		env.ParseConfig ('pkg-config --cflags --libs ' + k)
+env.ParseConfig ('pkg-config --cflags --libs sdl')
 		
-env.Append (LIBS = 'SDL_ttf')
+#env.Append (LIBS = 'SDL_ttf')
 env.Append (CXXFLAGS = '-g')
 
 source_files = [
