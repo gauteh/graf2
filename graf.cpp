@@ -56,8 +56,6 @@ int Axis::get_direction () { return direction; }
 Graf::Graf (SDL_Surface *s, const char *f, int width, int height, int bpp) {
     surface = s;
     screen = s;
-    axis_x.set_screen (screen);
-    axis_y.set_screen (screen);
 
     SCREEN_WIDTH = width;
     SCREEN_HEIGHT = height;
@@ -87,27 +85,48 @@ void Graf::draw () {
     ay_rect->x = 0;
     ay_rect->y = SCREEN_HEIGHT - ay_rect->h; 
 
+    axis_x.set_screen (screen);
+    axis_y.set_screen (screen);
+
     axis_x.draw ();
     axis_y.draw ();
-
+    
     apply_surface (axis_x.get_rect()->x, axis_x.get_rect()->y, axis_x.get_surface (), surface);
     apply_surface (axis_y.get_rect()->x, axis_y.get_rect()->y, axis_y.get_surface (), surface);
 
-    // draw plots
-    vector<Plot>::iterator iter;
-    for (iter = plots.begin (); iter != plots.end(); iter++) {
-        SDL_Rect *r = iter->get_rect ();
+    // plots
+    vector<Plot>::iterator p;
+    for (p = plots.begin (); p != plots.end (); p++) {
+        SDL_Rect *r = p->get_rect ();
         r->h = SCREEN_HEIGHT - 30;
         r->w = SCREEN_WIDTH - 30;
         r->x = 30;
-        r->y = SCREEN_HEIGHT - 30;
-        iter->set_screen (surface);
+        r->y = 0;
 
-        iter->draw ();
-        SDL_Surface *s = iter->get_surface ();
-
-        apply_surface (r->x, r->y, s, surface);
+        p->set_screen(screen);
+        p->draw ();
+        apply_surface (r->x, r->y, p->get_surface (), screen);
     }
+
+
+
+    // draw plots
+    //vector<Plot>::iterator iter = plots.begin ();
+    //iter++;
+    ////iter++;
+    ////for (; iter != plots.end(); iter++) {
+        //SDL_Rect *r = iter->get_rect ();
+        //r->h = SCREEN_HEIGHT - 30;
+        //r->w = SCREEN_WIDTH - 30;
+        //r->x = 30;
+        //r->y = 0; 
+        //iter->set_screen (surface);
+
+        ////iter->draw ();
+        //SDL_Surface *s = iter->get_surface ();
+
+        ////apply_surface (r->x, r->y, s, surface);
+        ////}
 }
 
 int Graf::run () {

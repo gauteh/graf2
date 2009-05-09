@@ -21,7 +21,16 @@ void apply_surface (int x, int y, SDL_Surface *source, SDL_Surface *destination)
 
 void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
     Uint32 *pixels = (Uint32 *)surface->pixels;
-    pixels[(y * surface->w ) + x] = pixel;
+    if (y > surface->h || x > surface->w) {
+        cout << "ERROR: put_pixel outside surface\n";
+        return;
+    }
+    if (y < 0 || x < 0) {
+        cout << "ERROR: put_pixel outside surface\n";
+        cout << "ERROR: coordinates must be positive\n";
+        return;
+    }
+    pixels[(y * surface->w) + x] = pixel;
 }
 
 Uint32 get_pixel32 (SDL_Surface *surface, int x, int y) {
@@ -85,12 +94,15 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
         int a, b;
         a = (y2 - y1)/(x2 - x1);
         b = y1;
-        
-        for (int i = 0; i < s->w; i++) {
-            for (int j = 0; j < s->h; j++) {
-                // TODO: 
-                put_pixel32 (s, i, j, pixel);
-            }
+       
+        if (x2 < x1) {
+            int t = x1;
+            x1 = x2;
+            x2 = x1;
+        }
+        for (int x = x1; x <= x1; x++) {
+            int y = a*x + y1;
+            put_pixel32 (s, x, y, pixel);
         }
     }
 

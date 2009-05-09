@@ -2,13 +2,16 @@
  * plot.cpp: Gfx and drawing of each point
  */
 
+# include <iostream>
 # include <SDL/SDL.h>
 # include <vector>
+# include <cmath>
 # include "plot.h"
 
 using namespace std;
 
 Plot::Plot () {
+    screen = NULL;
     surface = NULL;
     points = 0;
 }
@@ -54,17 +57,21 @@ void Plot::draw () {
     int n_x = 0;
 
     vector<float>::iterator i_y;
-    for (i_y = y.begin (); i_y != y.end (); i_y++) {
-        int y = *(i_y) * (rect.h / (get_max () - get_min ()));
-        int x = n_x * inc_x;
-        put_pixel32 (surface, x, rect.h - y, WHITE);
-    }
+    int p_x, p_y;
 
-    //assume there exists equally many y's as x's
-    //for (i_x = x.begin(); i_x != x.end (); i_x++) {
-        //float t = *(i_y);
-        //put_pixel32 (surface, n_x * inc_x, rect.h - (t * inc_y), WHITE);
-        //i_y++;
-        //n_x++;
-    //}
+    float min = get_min ();
+    if (min > 0) // start på minimum 0
+        min = 0;
+
+    int inc_y = rect.h / (get_max () - min);
+    
+    for (i_y = y.begin (); i_y != y.end (); i_y++) {
+
+        int y = *(i_y) * inc_y + inc_y * abs (min);;
+
+        int x = n_x * inc_x;
+
+        put_pixel32 (surface, x, rect.h - y -1, WHITE);
+        n_x++;
+    }
 }
