@@ -14,6 +14,10 @@ Plot::Plot () {
     screen = NULL;
     surface = NULL;
     points = 0;
+    color = WHITE;
+    inc_x = 0;
+    inc_y = 0;
+    draw_min = 0;
 }
 
 void Plot::set_label (string s) {
@@ -50,28 +54,32 @@ float Plot::get_min () {
     return min;
 }
 
+void Plot::set_inc (int ix, int iy) {
+    inc_x = ix;
+    inc_y = iy;
+}
+
+void Plot::set_draw_min (float m) {
+    draw_min = m;
+}
+
 void Plot::draw () {
     setup_surface ();
 
-    float inc_x = rect.w / points; 
     int n_x = 0;
 
     vector<float>::iterator i_y;
-    int p_x, p_y;
-
-    float min = get_min ();
-    if (min > 0) // start på minimum 0
-        min = 0;
-
-    int inc_y = rect.h / (get_max () - min);
+    int p_x = 0;
+    int p_y = 0;
     
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
-
-        int y = *(i_y) * inc_y + inc_y * abs (min);;
-
+        int y = *(i_y) * inc_y + inc_y * abs (draw_min);;
         int x = n_x * inc_x;
 
         put_pixel32 (surface, x, rect.h - y -1, WHITE);
+        draw_line (surface, p_x, rect.h - p_y - 1, x, rect.h - y - 1, WHITE);
+        p_x = x;
+        p_y = y;
         n_x++;
     }
 }

@@ -96,37 +96,42 @@ void Graf::draw () {
 
     // plots
     vector<Plot>::iterator p;
+    float max = 0;
+    float min = 0;
+    int points = 0;
     for (p = plots.begin (); p != plots.end (); p++) {
-        SDL_Rect *r = p->get_rect ();
-        r->h = SCREEN_HEIGHT - 30;
-        r->w = SCREEN_WIDTH - 30;
-        r->x = 30;
-        r->y = 0;
+        if (p->get_min () < min)
+            min = p->get_min ();
+        
+        if (p->get_max() > max)
+            max = p->get_max ();
 
-        p->set_screen(screen);
-        p->draw ();
-        apply_surface (r->x, r->y, p->get_surface (), screen);
+        if (p->get_points () > points) 
+            points = p->get_points ();
     }
 
+    SDL_Rect r;
+    r.h = SCREEN_HEIGHT - 30;
+    r.w = SCREEN_WIDTH - 30;
+    r.x = 30;
+    r.y = 0;
+   
+    if (min > 0)
+        min = 0; // start på 0 uansett
+    int inc_x = r.w / points;
+    int inc_y = r.h / (max - min);
 
+    //bool first = true;
+    for (p = plots.begin (); p != plots.end (); p++) {
+        p->set_inc (inc_x, inc_y);
+        p->set_draw_min (min);
+        p->set_rect (&r);
+        p->set_screen(screen);
 
-    // draw plots
-    //vector<Plot>::iterator iter = plots.begin ();
-    //iter++;
-    ////iter++;
-    ////for (; iter != plots.end(); iter++) {
-        //SDL_Rect *r = iter->get_rect ();
-        //r->h = SCREEN_HEIGHT - 30;
-        //r->w = SCREEN_WIDTH - 30;
-        //r->x = 30;
-        //r->y = 0; 
-        //iter->set_screen (surface);
-
-        ////iter->draw ();
-        //SDL_Surface *s = iter->get_surface ();
-
-        ////apply_surface (r->x, r->y, s, surface);
-        ////}
+        p->draw ();
+        apply_surface (r.x, r.y, p->get_surface (), screen);
+        cout << "Draw plot.." << endl;
+    }
 }
 
 int Graf::run () {

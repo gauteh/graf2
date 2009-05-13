@@ -68,6 +68,7 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
     // alle punkt på ei linje følger likninga y = ax + b
     if ((x2 - x1) == 0) {
         // vertical
+        cout << "v" << endl;
         for (int i = 0; i < s->w; i++) {
             for (int j = 0; j < s->h; j++) {
                 if (i == x2) {
@@ -80,6 +81,7 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
         }
     } else if ((y2 - y1) == 0) {
         // horizontal
+        cout << "h" << endl;
         for (int i = 0; i < s->w; i++) {
             for (int j = 0; j < s->h; j++) {
                 if (j == y2) {
@@ -91,6 +93,7 @@ void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
             }
         }
     } else {
+        cout << "draw custom line..\n";
         int a, b;
         a = (y2 - y1)/(x2 - x1);
         b = y1;

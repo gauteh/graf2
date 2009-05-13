@@ -18,6 +18,12 @@ class Plot : public SDL_Item {
         vector<float> x;
         vector<float> y;
 
+        int inc_x;
+        int inc_y;
+        float draw_min;
+
+        Uint32 color;
+
     public:
         Plot ();
         void draw ();
@@ -29,4 +35,7 @@ class Plot : public SDL_Item {
 
         float get_max ();
         float get_min ();
+
+        void set_inc (int, int);
+        void set_draw_min (float);
 };
