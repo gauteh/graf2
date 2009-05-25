@@ -14,7 +14,7 @@ using namespace std;
 void apply_surface (int x, int y, SDL_Surface *source, SDL_Surface *destination) {
     SDL_Rect offset;
     offset.x = x;
-    offset.y = y;
+    offset.y = destination->h - y - source->h;
 
     SDL_BlitSurface (source, NULL, destination, &offset);
 }
@@ -23,19 +23,22 @@ void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
     Uint32 *pixels = (Uint32 *)surface->pixels;
     if (y > surface->h || x > surface->w) {
         cout << "ERROR: put_pixel outside surface\n";
+        cout << "Pixel:   [" << x << ", " << y << "]\n";
+        cout << "Surface: [" << surface->w << ", " << surface->h << "]\n";
         return;
     }
     if (y < 0 || x < 0) {
         cout << "ERROR: put_pixel outside surface\n";
         cout << "ERROR: coordinates must be positive\n";
+        cout << "Pixel:   [" << x << ", " << y << "]\n";
         return;
     }
-    pixels[(y * surface->w) + x] = pixel;
+    pixels[((surface->h - y) * surface->w) + x] = pixel;
 }
 
 Uint32 get_pixel32 (SDL_Surface *surface, int x, int y) {
     Uint32 *pixels = (Uint32 *)surface->pixels;
-    return pixels[(y * surface->w) + x];
+    return pixels[((surface->h - y) * surface->w) + x];
 }
 
 SDL_Surface * SDL_Item::get_surface () { return surface; }
@@ -66,6 +69,9 @@ void SDL_Item::draw () {
 
 void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
     // alle punkt på ei linje følger likninga y = ax + b
+    y1 = s->h - y1;
+    y2 = s->h - y2;
+
     if ((x2 - x1) == 0) {
         // vertical
         cout << "v" << endl;

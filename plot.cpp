@@ -73,11 +73,12 @@ void Plot::draw () {
     int p_y = 0;
     
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
-        int y = *(i_y) * inc_y + inc_y * abs (draw_min);;
+        int y = *(i_y) * inc_y + inc_y * abs (draw_min);
         int x = n_x * inc_x;
 
-        put_pixel32 (surface, x, rect.h - y -1, WHITE);
-        draw_line (surface, p_x, rect.h - p_y - 1, x, rect.h - y - 1, WHITE);
+
+        put_pixel32 (surface, x,  y, WHITE);
+        //draw_line (surface, p_x, rect.h - p_y - 1, x, rect.h - y - 1, WHITE);
         p_x = x;
         p_y = y;
         n_x++;
