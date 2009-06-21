@@ -39,7 +39,7 @@ void Axis::draw () {
         float scale_y = static_cast<float>(rect.h) / static_cast<float>(stop - start);
         int zero = (0 - start) * scale_y;
 
-        float inc_y = static_cast<float>(stop - start) / 10;
+        float inc_y = static_cast<float>(stop - start) / 20;
 
         int j = 0;
 
