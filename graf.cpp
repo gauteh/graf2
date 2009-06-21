@@ -39,28 +39,26 @@ int Graf::run () {
     SDL_Event event;
     int run = 1;
 
-    while (run) {
-        while (SDL_PollEvent (&event)) {
-            switch (event.type) {
-                case SDL_KEYDOWN:
-                case SDL_PRESSED:
-                    switch (event.key.keysym.sym) {
-                        case SDLK_q:
-                            cout << "\nGoodbye!\n";
-                            run = 0;
-                            break;
+    while (run && SDL_WaitEvent (&event)) {
+        switch (event.type) {
+            case SDL_KEYDOWN:
+            case SDL_PRESSED:
+                switch (event.key.keysym.sym) {
+                    case SDLK_q:
+                        cout << "\nGoodbye!\n";
+                        run = 0;
+                        break;
 
-                        case SDLK_a:
-                            plot_a.toggle_active ();
-                            draw ();
-                            break;
+                    case SDLK_a:
+                        plot_a.toggle_active ();
+                        draw ();
+                        break;
 
-                        case SDLK_b:
-                            plot_b.toggle_active ();
-                            draw ();
-                            break;
-                    }
-            }
+                    case SDLK_b:
+                        plot_b.toggle_active ();
+                        draw ();
+                        break;
+                }
         }
     }
     
