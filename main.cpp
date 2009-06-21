@@ -12,10 +12,13 @@
 
 using namespace std;
 
-# define VERSION "20090621"
+# ifndef BUILDTIME
+    # define BUILDTIME "unknown"
+# endif
+# define VERSION "build-" BUILDTIME 
 
 int main () {
-    cout << "Graf v" << VERSION << endl;
+    cout << "Graf " << VERSION << endl;
     cout << "Copyright (c) 2009 Gaute Hope <gaute.hope@stud.hib.no>" << endl;
 
     const int SCREEN_WIDTH = 1024;
@@ -43,7 +46,7 @@ int main () {
         return 0;
     }
 
-    string title = "Graf v" VERSION ": ";
+    string title = "Graf " VERSION ": ";
     title = title + filename;
 
     SDL_WM_SetCaption (title.data (), NULL);
