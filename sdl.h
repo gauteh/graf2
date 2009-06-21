@@ -12,7 +12,9 @@
 # define LILA 0x7C48E8
 # define GREEN 0x197900
 
-# define AXIS 0x15c802
+# define AXIS WHITE
+# define PLOT_A LILA
+# define PLOT_B GREEN
 
 void apply_surface (int, int, SDL_Surface *, SDL_Surface *);
 void draw_line (SDL_Surface *, int, int, int, int, Uint32);

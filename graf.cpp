@@ -84,8 +84,8 @@ void Graf::draw () {
     plot_b.set_rect (&r);
     plot_b.set_screen (screen);
 
-    plot_a.set_color (LILA);
-    plot_b.set_color (GREEN);
+    plot_a.set_color (PLOT_A);
+    plot_b.set_color (PLOT_B);
 
     plot_a.draw ();
     plot_b.draw ();
@@ -112,8 +112,8 @@ void Graf::draw () {
     axis_x.set_screen (screen);
     axis_y.set_screen (screen);
 
-    axis_x.set_color (WHITE);
-    axis_y.set_color (WHITE);
+    axis_x.set_color (AXIS);
+    axis_y.set_color (AXIS);
 
     axis_x.draw ();
     axis_y.draw ();
