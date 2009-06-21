@@ -61,6 +61,10 @@ float Plot::get_global_min () {
     return global_min;
 }
 
+float Plot::get_global_max () {
+    return global_max;
+}
+
 int Plot::get_point_zero () {
     float scale_y = static_cast<float>(rect.h) / static_cast<float>(global_max - global_min);
 

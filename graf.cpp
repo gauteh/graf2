@@ -103,7 +103,7 @@ void Graf::draw () {
     ay_rect->w = 30;
 
     ax_rect->x = 0;
-    ax_rect->y = plot_a.get_point_zero(); 
+    ax_rect->y = plot_a.get_point_zero() - 15; 
     ay_rect->x = 0;
     ay_rect->y = 0; 
 

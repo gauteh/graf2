@@ -37,6 +37,7 @@ class Plot : public SDL_Item {
         void set_global_max (float);
 
         float get_global_min ();
+        float get_global_max ();
         int get_point_zero ();
 };
 

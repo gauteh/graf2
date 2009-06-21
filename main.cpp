@@ -11,10 +11,9 @@
 
 using namespace std;
 
-# define VERSION "0.1"
+# define VERSION "20090621"
 
 int main () {
-    
     cout << "Graf v" << VERSION << endl;
     cout << "Copyright (c) 2009 Gaute Hope <gaute.hope@stud.hib.no>" << endl;
 
@@ -38,7 +37,10 @@ int main () {
         return 0;
     }
 
-    SDL_WM_SetCaption ("Graf - v" VERSION, NULL);
+    string title = "Graf v" VERSION ": ";
+    title = title + filename;
+
+    SDL_WM_SetCaption (title.data (), NULL);
 
         
     Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP); // init and setup graf, this runs the main application
