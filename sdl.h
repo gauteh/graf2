@@ -9,6 +9,11 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x0
 
+# define LILA 0x7C48E8
+# define GREEN 0x197900
+
+# define AXIS 0x15c802
+
 void apply_surface (int, int, SDL_Surface *, SDL_Surface *);
 void draw_line (SDL_Surface *, int, int, int, int, Uint32);
 Uint32 get_pixel32 (SDL_Surface *, int, int);

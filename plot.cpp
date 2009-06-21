@@ -57,6 +57,17 @@ void Plot::set_global_min (float m) {
     global_min = m;
 }
 
+float Plot::get_global_min () {
+    return global_min;
+}
+
+int Plot::get_point_zero () {
+    float scale_y = static_cast<float>(rect.h) / static_cast<float>(global_max - global_min);
+
+    int y = (0 - global_min) * scale_y;
+    return y;
+}
+
 void Plot::set_global_max (float m) {
     global_max = m;
 }

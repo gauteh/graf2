@@ -19,6 +19,8 @@ Graf::Graf (SDL_Surface *s, const char *f, int width, int height, int bpp) {
     surface = s;
     screen = s;
 
+    color = BLACK;
+
     SCREEN_WIDTH = width;
     SCREEN_HEIGHT = height;
     SCREEN_BPP = bpp;
@@ -67,7 +69,31 @@ int Graf::run () {
 
 void Graf::draw () {
     // clear screen
-    SDL_FillRect (screen, NULL, 0);
+    SDL_FillRect (screen, NULL, color);
+
+    // plots
+    SDL_Rect r; 
+    r.h = SCREEN_HEIGHT; 
+    r.w = SCREEN_WIDTH - 15; 
+    r.x = 15;
+    r.y = 0; // horisontal aksa er på 30/2
+
+    plot_a.set_rect (&r);
+    plot_a.set_screen (screen);
+
+    plot_b.set_rect (&r);
+    plot_b.set_screen (screen);
+
+    plot_a.set_color (LILA);
+    plot_b.set_color (GREEN);
+
+    plot_a.draw ();
+    plot_b.draw ();
+
+    if (plot_a.is_active ())
+        apply_surface (r.x, r.y, plot_a.get_surface (), screen);
+    if (plot_b.is_active ())
+        apply_surface (r.x, r.y, plot_b.get_surface (), screen);
 
     // draw axis
     SDL_Rect * ax_rect = axis_x.get_rect ();
@@ -79,12 +105,15 @@ void Graf::draw () {
     ay_rect->w = 30;
 
     ax_rect->x = 0;
-    ax_rect->y = 0; 
+    ax_rect->y = plot_a.get_point_zero(); 
     ay_rect->x = 0;
     ay_rect->y = 0; 
 
     axis_x.set_screen (screen);
     axis_y.set_screen (screen);
+
+    axis_x.set_color (WHITE);
+    axis_y.set_color (WHITE);
 
     axis_x.draw ();
     axis_y.draw ();
@@ -92,28 +121,6 @@ void Graf::draw () {
     apply_surface (axis_x.get_rect()->x, axis_x.get_rect()->y, axis_x.get_surface (), surface);
     apply_surface (axis_y.get_rect()->x, axis_y.get_rect()->y, axis_y.get_surface (), surface);
 
-
-    // plots
-    SDL_Rect r; 
-    r.h = SCREEN_HEIGHT - 15; 
-    r.w = SCREEN_WIDTH - 15; 
-    r.x = 15;
-    r.y = 15; // horisontal aksa er på 30/2
-
-    plot_a.set_rect (&r);
-    plot_a.set_screen (screen);
-
-    plot_b.set_rect (&r);
-    plot_b.set_screen (screen);
-
-    plot_a.draw ();
-    plot_b.draw ();
-
-    if (plot_a.is_active ())
-        apply_surface (r.x, r.y, plot_a.get_surface (), screen);
-    if (plot_b.is_active ())
-        apply_surface (r.x, r.y, plot_b.get_surface (), screen);
-   
     SDL_UpdateRect (screen, 0, 0, 0, 0);
 }
 
