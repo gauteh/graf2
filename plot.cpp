@@ -3,6 +3,7 @@
  */
 
 # include <iostream>
+# include <iomanip>
 # include <SDL/SDL.h>
 # include <vector>
 # include <cmath>
@@ -14,10 +15,8 @@ Plot::Plot () {
     screen = NULL;
     surface = NULL;
     points = 0;
-    color = WHITE;
-    inc_x = 0;
-    inc_y = 0;
-    draw_min = 0;
+
+    color = rand () % 0xFFFFFF;
 }
 
 void Plot::set_label (string s) {
@@ -54,19 +53,6 @@ float Plot::get_min () {
     return min;
 }
 
-void Plot::set_inc (int ix, int iy) {
-    inc_x = ix;
-    inc_y = iy;
-}
-
-void Plot::set_draw_min (float m) {
-    draw_min = m;
-}
-
-void Plot::set_draw_max (float m) {
-    draw_max = m;
-}
-
 void Plot::set_global_min (float m) {
     global_min = m;
 }
@@ -80,27 +66,36 @@ void Plot::draw () {
 
     SDL_FillRect (surface, NULL, 0); // clear surface
 
-    float scale_x = rect.w / points;
-    float scale_y = rect.h / (global_max - global_min);
+    float scale_x = static_cast<float>(rect.w) / static_cast<float>(points);
+    float scale_y = static_cast<float>(rect.h) / static_cast<float>(global_max - global_min);
 
     int n_x = 0;
 
     vector<float>::iterator i_y;
     int p_x = 0;
     int p_y = 0;
+
+    cout << "Draw plot [" << label << "]:" << endl;
+    cout << "Height: " << setw(3) << rect.h << endl;
+    cout << "Width:  " << setw(3) << rect.w << endl;
+    cout << "Points: " << setw(3) << points << ", scale_x: " << scale_x << endl;
+    cout << "             scale_y: " << scale_y << endl;
+    cout << "Color: 0x" << hex << color << endl;
     
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
         int y = (*(i_y) - global_min) * scale_y;
-        int x = n_x * scale_x;
+        int x = static_cast<float>(n_x) * scale_x;
 
-        put_pixel32 (surface, x,  y, WHITE);
-
-        n_x++;
-        //cout << "[Plot=" << label << "] y=" << y << " (scale=" << scale_y << ", max=" << global_max << ", min=" << global_min << ")" << endl;
+        //put_pixel32 (surface, x, y, WHITE);
 
         if (p_x)
-            draw_line (surface, p_x, p_y, x, y, WHITE);
+            draw_line (surface, p_x, p_y, x, y, color);
+
         p_x = x;
         p_y = y;
+
+        n_x++;
+
+        //cout << "[Plot=" << label << "] x=" << x << ", y=" << y << " (scale=" << scale_y << ", max=" << global_max << ", min=" << global_min << ")" << endl;
     }
 }

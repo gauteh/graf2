@@ -20,7 +20,9 @@ class SDL_Item {
         SDL_Surface *screen;
         SDL_Rect rect;
 
+        Uint32 color;
         bool active;
+
     public:
         SDL_Item ();
         virtual void draw ();
@@ -33,5 +35,8 @@ class SDL_Item {
         bool is_active ();
         bool toggle_active ();
         bool set_active (bool);
+
+        void set_color (Uint32);
+        Uint32 get_color ();
 };
 

@@ -15,7 +15,6 @@ class Axis : public SDL_Item {
         float start;
         float stop;
         int direction;
-        Uint32 color;
 
     public:
         static const int VERTICAL = 0;
@@ -29,9 +28,6 @@ class Axis : public SDL_Item {
         void set_label (string s);
         void set_direction (int);
         int get_direction ();
-
-        void set_color (Uint32);
-        Uint32 get_color ();
 
         void draw ();
 };

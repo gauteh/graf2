@@ -13,7 +13,6 @@ Axis::Axis (float _start, float _stop) {
     stop = _stop;
     surface = NULL;
     direction = Axis::VERTICAL;
-    color = WHITE;
 }
 
 Axis::Axis () {
@@ -21,14 +20,11 @@ Axis::Axis () {
     stop = 0;
     direction = Axis::VERTICAL;
     surface = NULL;
-    color = WHITE;
 }
 
 void Axis::set_start (float s) { start = s; }
 void Axis::set_stop (float s) { stop = s; }
 void Axis::set_label (string s) { label = s; }
-void Axis::set_color (Uint32 c) { color = c; }
-Uint32 Axis::get_color () { return color; }
 
 void Axis::draw () {
     setup_surface (); 

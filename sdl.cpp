@@ -17,6 +17,7 @@ using namespace std;
  * class SDL_Item:
  */
 SDL_Item::SDL_Item () {
+    color = WHITE;
     active = true;
 }
 
@@ -62,6 +63,14 @@ bool SDL_Item::toggle_active () {
 
 bool SDL_Item::set_active (bool on) {
     active = on;
+}
+
+void SDL_Item::set_color (Uint32 c) {
+    color = c;
+}
+
+Uint32 SDL_Item::get_color () {
+    return color;
 }
 
 /*

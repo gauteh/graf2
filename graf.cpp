@@ -95,9 +95,9 @@ void Graf::draw () {
 
     // plots
     SDL_Rect r; 
-    r.h = SCREEN_HEIGHT - 30; 
-    r.w = SCREEN_WIDTH - 30; 
-    r.x = 30;
+    r.h = SCREEN_HEIGHT - 15; 
+    r.w = SCREEN_WIDTH - 15; 
+    r.x = 15;
     r.y = 15; // horisontal aksa er på 30/2
 
     plot_a.set_rect (&r);
@@ -140,8 +140,8 @@ bool Graf::read () {
 
     data.close ();
 
-    plot_a.set_label ("A");
-    plot_b.set_label ("B");
+    plot_a.set_label ("Vi");
+    plot_b.set_label ("Vo");
 
     // finn maks
     float max = 0;

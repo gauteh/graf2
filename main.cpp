@@ -5,6 +5,7 @@
 # include <iostream>
 # include <SDL/SDL.h>
 # include <string>
+# include <ctime>
 
 # include "graf.h"
 
@@ -20,6 +21,8 @@ int main () {
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 640;
     const int SCREEN_BPP = 32;
+
+    srand (static_cast<int>(time(0)));
 
     const char *filename = "GRAF.DAT";
 
