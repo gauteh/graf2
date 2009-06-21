@@ -63,8 +63,25 @@ void Plot::set_draw_min (float m) {
     draw_min = m;
 }
 
+void Plot::set_draw_max (float m) {
+    draw_max = m;
+}
+
+void Plot::set_global_min (float m) {
+    global_min = m;
+}
+
+void Plot::set_global_max (float m) {
+    global_max = m;
+}
+
 void Plot::draw () {
     setup_surface ();
+
+    SDL_FillRect (surface, NULL, 0); // clear surface
+
+    float scale_x = rect.w / points;
+    float scale_y = rect.h / (global_max - global_min);
 
     int n_x = 0;
 
@@ -73,14 +90,12 @@ void Plot::draw () {
     int p_y = 0;
     
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
-        int y = *(i_y) * inc_y + inc_y * abs (draw_min);
-        int x = n_x * inc_x;
-
+        int y = (*(i_y) - global_min) * scale_y;
+        int x = n_x * scale_x;
 
         put_pixel32 (surface, x,  y, WHITE);
-        //draw_line (surface, p_x, rect.h - p_y - 1, x, rect.h - y - 1, WHITE);
-        p_x = x;
-        p_y = y;
+
         n_x++;
+        //cout << "[Plot=" << label << "] y=" << y << " (scale=" << scale_y << ", max=" << global_max << ", min=" << global_min << ")" << endl;
     }
 }

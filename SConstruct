@@ -8,8 +8,9 @@ env.Append (CXXFLAGS = '-g')
 source_files = [
 	'main.cpp',
     'graf.cpp',
-    'sdlmisc.cpp',
+    'sdl.cpp',
     'plot.cpp',
+    'axis.cpp',
 	]
 
 env.Program (target = 'graf', source = source_files)

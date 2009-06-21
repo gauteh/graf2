@@ -7,7 +7,7 @@
 # include <string>
 # include <vector>
 
-# include "sdlmisc.h"
+# include "sdl.h"
 
 using namespace std;
 
@@ -20,7 +20,12 @@ class Plot : public SDL_Item {
 
         int inc_x;
         int inc_y;
+
         float draw_min;
+        float draw_max;
+
+        float global_min;
+        float global_max;
 
         Uint32 color;
 
@@ -38,4 +43,9 @@ class Plot : public SDL_Item {
 
         void set_inc (int, int);
         void set_draw_min (float);
+        void set_draw_max (float);
+
+        void set_global_min (float);
+        void set_global_max (float);
 };
+
