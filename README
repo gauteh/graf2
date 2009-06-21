@@ -1,0 +1,6 @@
+Requirements:
+ * SDL
+ * SDL_ttf
+
+The font verdana.ttf in the execution folder.
+
