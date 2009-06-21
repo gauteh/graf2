@@ -7,7 +7,9 @@
 # include <SDL/SDL.h>
 # include <vector>
 # include <cmath>
+
 # include "plot.h"
+# include "text.h"
 
 using namespace std;
 
@@ -15,12 +17,16 @@ Plot::Plot () {
     screen = NULL;
     surface = NULL;
     points = 0;
-
+    index = 0;
     color = rand () % 0xFFFFFF;
 }
 
 void Plot::set_label (string s) {
     label = s;
+}
+
+string Plot::get_label () {
+    return label;
 }
 
 int Plot::get_points () { return points; }
@@ -31,6 +37,14 @@ void Plot::add_point (float _x, float _y) {
    x.push_back (_x);
    y.push_back (_y);
    points++;
+}
+
+void Plot::set_index (int i) {
+    index = i;
+}
+
+int Plot::get_index () {
+    return index;
 }
 
 float Plot::get_max () {

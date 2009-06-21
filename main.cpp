@@ -4,6 +4,7 @@
 
 # include <iostream>
 # include <SDL/SDL.h>
+# include <SDL/SDL_ttf.h>
 # include <string>
 # include <ctime>
 
@@ -17,7 +18,7 @@ int main () {
     cout << "Graf v" << VERSION << endl;
     cout << "Copyright (c) 2009 Gaute Hope <gaute.hope@stud.hib.no>" << endl;
 
-    const int SCREEN_WIDTH = 800;
+    const int SCREEN_WIDTH = 1024;
     const int SCREEN_HEIGHT = 640;
     const int SCREEN_BPP = 32;
 
@@ -27,6 +28,11 @@ int main () {
 
     if (SDL_Init (SDL_INIT_EVERYTHING) == -1) {
         cout << "Failed to setup SDL!\n";
+        return 0;
+    }
+
+    if (TTF_Init () == -1) {
+        cout << "Failed to setup SDL_ttf!\n";
         return 0;
     }
 
@@ -45,6 +51,7 @@ int main () {
         
     Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP); // init and setup graf, this runs the main application
 
+    TTF_Quit ();
     SDL_Quit ();
     return 0;
 }

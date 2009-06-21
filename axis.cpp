@@ -47,7 +47,7 @@ void Axis::draw () {
     } else if (direction == HORIZONTAL) { 
         draw_line (surface, 0, rect.h / 2, rect.w, rect.h / 2, color);
         float scale_x = static_cast<float>(rect.w) / static_cast<float>(stop - start);
-        for (int i = 0; i < rect.w; i += static_cast<float>(rect.w) / 20)
+        for (int i = 15; i < rect.w; i += static_cast<float>(rect.w) / 20)
             draw_line (surface, i, 5, i, rect.h - 5, color);
     }
 }

@@ -13,6 +13,8 @@ using namespace std;
 
 class Plot : public SDL_Item {
     private:
+        int index;
+
         string label;
         int points;
         vector<float> x;
@@ -25,6 +27,7 @@ class Plot : public SDL_Item {
         Plot ();
         void draw ();
         void set_label (string s);
+        string get_label ();
         void add_point (float, float);
         int get_points ();
         vector<float> get_x ();
@@ -39,5 +42,8 @@ class Plot : public SDL_Item {
         float get_global_min ();
         float get_global_max ();
         int get_point_zero ();
+
+        void set_index (int);
+        int get_index ();
 };
 

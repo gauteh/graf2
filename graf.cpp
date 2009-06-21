@@ -9,9 +9,10 @@
 # include <string>
 # include <vector>
 
+# include "sdl.h"
 # include "graf.h"
 # include "axis.h"
-# include "sdl.h"
+# include "text.h"
 
 using namespace std;
 
@@ -41,11 +42,16 @@ int Graf::run () {
 
     while (run && SDL_WaitEvent (&event)) {
         switch (event.type) {
+            case SDL_QUIT:
+                cout << "Goodbye!\n";
+                run = 0;
+                break;
+
             case SDL_KEYDOWN:
             case SDL_PRESSED:
                 switch (event.key.keysym.sym) {
                     case SDLK_q:
-                        cout << "\nGoodbye!\n";
+                        cout << "Goodbye!\n";
                         run = 0;
                         break;
 
@@ -93,6 +99,31 @@ void Graf::draw () {
     if (plot_b.is_active ())
         apply_surface (r.x, r.y, plot_b.get_surface (), screen);
 
+    // labels for plots
+    Text l_a ("Plot a: " + plot_a.get_label ());
+    l_a.set_color (plot_a.get_color());
+    l_a.draw ();
+
+    Text l_b ("Plot b: " + plot_b.get_label ());
+    l_b.set_color (plot_b.get_color());
+    l_b.draw ();
+    
+    int widest = 0;
+    if (l_a.get_surface ()->w > l_b.get_surface ()->w) {
+        widest = l_a.get_surface ()->w;  
+    } else {
+        widest = l_b.get_surface ()->w;
+    }
+    int hi = 0;
+    if (l_a.get_surface ()->h > l_b.get_surface ()->h) {
+        hi = l_a.get_surface ()->h;  
+    } else {
+        hi = l_b.get_surface ()->h;
+    }
+
+    apply_surface (screen->w - widest - 10, screen->h - hi - 10, l_a.get_surface(), screen);
+    apply_surface (screen->w - widest - 10, screen->h - 2*(hi) - 10, l_b.get_surface(), screen);
+    
     // draw axis
     SDL_Rect * ax_rect = axis_x.get_rect ();
     SDL_Rect * ay_rect = axis_y.get_rect ();
@@ -146,7 +177,9 @@ bool Graf::read () {
     data.close ();
 
     plot_a.set_label ("Vi");
+    plot_a.set_index (0);
     plot_b.set_label ("Vo");
+    plot_b.set_index (1);
 
     // finn maks
     float max = 0;
