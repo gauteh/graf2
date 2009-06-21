@@ -1,7 +1,7 @@
 *.swp
 *.o
 graf
+prepare
 .sconsign*
-GRAF.DAT
 verdana.ttf
 

@@ -19,3 +19,5 @@ source_files = [
 
 env.Program (target = 'graf', source = source_files)
 
+env.Program (target = 'prepare', source = 'prepare_data.cpp')
+
