@@ -97,5 +97,10 @@ void Plot::draw () {
 
         n_x++;
         //cout << "[Plot=" << label << "] y=" << y << " (scale=" << scale_y << ", max=" << global_max << ", min=" << global_min << ")" << endl;
+
+        if (p_x)
+            draw_line (surface, p_x, p_y, x, y, WHITE);
+        p_x = x;
+        p_y = y;
     }
 }

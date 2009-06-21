@@ -68,57 +68,53 @@ bool SDL_Item::set_active (bool on) {
  * Misc sdl functions
  */
 
-void draw_line (SDL_Surface *s, int x1, int y1, int x2, int y2, Uint32 pixel) {
-    // alle punkt på ei linje følger likninga y = ax + b
-    cout << "Draw line: [" << x1 << "," << y1 << "] -> ";
-    cout << "[" << x2 << "," << y2 << "]" << endl;
+void draw_line (SDL_Surface *s, int x0, int y0, int x1, int y1, Uint32 pixel) {
+    // Bruker Breshman's algoritme
+    // http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
-    y1 = s->h - y1;
-    y2 = s->h - y2;
-
-    if ((x2 - x1) == 0) {
-        // vertical
-        //cout << "v" << endl;
-        for (int i = 0; i < s->w; i++) {
-            for (int j = 0; j < s->h; j++) {
-                if (i == x2) {
-                    if ((j > y1) && ( j < y2)) 
-                        put_pixel32 (s, i, j, pixel);
-                    if ((j < y1) && (j > y2)) 
-                        put_pixel32 (s, i, j, pixel);
-                }
-            }
-        }
-    } else if ((y2 - y1) == 0) {
-        // horizontal
-        //cout << "h" << endl;
-        for (int i = 0; i < s->w; i++) {
-            for (int j = 0; j < s->h; j++) {
-                if (j == y2) {
-                    if ((j > x2) && (j < x1))
-                        put_pixel32 (s, i, j, pixel);
-                    if ((j < x2) && (j > x1))
-                        put_pixel32 (s, i, j, pixel);
-                }
-            }
-        }
-    } else {
-        cout << "draw custom line..\n";
-        int a, b;
-        a = (y2 - y1)/(x2 - x1);
-        b = y1;
-       
-        if (x2 < x1) {
-            int t = x1;
-            x1 = x2;
-            x2 = x1;
-        }
-        for (int x = x1; x <= x1; x++) {
-            int y = a*x + y1;
-            put_pixel32 (s, x, y, pixel);
-        }
+    int Dx = x1 - x0; 
+    int Dy = y1 - y0;
+    int steep = (abs(Dy) >= abs(Dx));
+    if (steep) {
+       swap(x0, y0);
+       swap(x1, y1);
+       // recompute Dx, Dy after swap
+       Dx = x1 - x0;
+       Dy = y1 - y0;
     }
-
+    int xstep = 1;
+    if (Dx < 0) {
+       xstep = -1;
+       Dx = -Dx;
+    }
+    int ystep = 1;
+    if (Dy < 0) {
+       ystep = -1;		
+       Dy = -Dy; 
+    }
+    int TwoDy = 2*Dy; 
+    int TwoDyTwoDx = TwoDy - 2*Dx; // 2*Dy - 2*Dx
+    int E = TwoDy - Dx; //2*Dy - Dx
+    int y = y0;
+    int xDraw, yDraw;	
+    for (int x = x0; x != x1; x += xstep) {		
+       if (steep) {			
+           xDraw = y;
+           yDraw = x;
+       } else {			
+           xDraw = x;
+           yDraw = y;
+       }
+       // plot
+       put_pixel32(s, xDraw, yDraw, pixel);
+       // next
+       if (E > 0) {
+           E += TwoDyTwoDx; //E += 2*Dy - 2*Dx;
+           y = y + ystep;
+       } else {
+           E += TwoDy; //E += 2*Dy;
+       }
+    }
 }
 
 void apply_surface (int x, int y, SDL_Surface *source, SDL_Surface *destination) {

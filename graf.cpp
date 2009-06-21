@@ -44,7 +44,7 @@ int Graf::run () {
                 case SDL_PRESSED:
                     switch (event.key.keysym.sym) {
                         case SDLK_q:
-                            cout << "'Q' pressed, Goodbye!\n";
+                            cout << "\nGoodbye!\n";
                             run = 0;
                             break;
 

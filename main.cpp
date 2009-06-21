@@ -15,7 +15,7 @@ using namespace std;
 int main () {
     
     cout << "Graf v" << VERSION << endl;
-    cout << "Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com> <gaute.hope@stud.hib.no>" << endl;
+    cout << "Copyright (c) 2009 Gaute Hope <gaute.hope@stud.hib.no>" << endl;
 
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 640;
