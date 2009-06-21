@@ -12,16 +12,26 @@
 Text::Text () {
     font = NULL;
     text = "";
+    size = 14;
 }
 
 Text::Text (string t) {
     text = t;
     font = NULL;
+    size = 14;
+}
+
+void Text::set_size (float s) {
+    size = s;
+}
+
+float Text::get_size () {
+    return size;
 }
 
 void Text::draw () {
     if (font == NULL)
-        font = TTF_OpenFont ("verdana.ttf", 14);
+        font = TTF_OpenFont ("verdana.ttf", size);
 
     SDL_Color c;
     c.r = color >> 16;

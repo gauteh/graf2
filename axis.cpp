@@ -2,9 +2,11 @@
 
 # include <SDL/SDL.h>
 # include <string>
+# include <sstream>
 
 # include "axis.h"
 # include "sdl.h"
+# include "text.h"
 
 using namespace std;
 
@@ -37,11 +39,41 @@ void Axis::draw () {
         float scale_y = static_cast<float>(rect.h) / static_cast<float>(stop - start);
         int zero = (0 - start) * scale_y;
 
-        for (int i = 0; i + zero < rect.h; i += static_cast<float>(rect.h) / 20)
+        float inc_y = static_cast<float>(stop - start) / 10;
+
+        int j = 0;
+
+        for (int i = 0; i + zero < rect.h; i += static_cast<float>(rect.h) / 20) {
             draw_line (surface, 15,  zero + i, rect.w, zero + i, color);
 
-        for (int i = 0; zero - i  > 0; i += static_cast<float>(rect.h) / 20)
+            ostringstream no;
+            float nof = j * inc_y;
+            no << nof;
+
+            Text t (no.str());
+            t.set_size (10);
+            t.draw ();
+            
+            apply_surface (0, zero + i, t.get_surface (), surface);
+
+            j++;
+        }
+
+        j = 0;
+        for (int i = 0; zero - i  > 0; i += static_cast<float>(rect.h) / 20) {
             draw_line (surface, 15,  zero - i, rect.w, zero - i, color);
+            ostringstream no;
+            float nof = j * inc_y;
+            no << nof;
+
+            Text t (no.str());
+            t.set_size (10);
+            t.draw ();
+            
+            apply_surface (0, zero - i, t.get_surface (), surface);
+
+            j--;
+        }
 
 
     } else if (direction == HORIZONTAL) { 
