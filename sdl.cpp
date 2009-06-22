@@ -78,7 +78,7 @@ Uint32 SDL_Item::get_color () {
  */
 
 void draw_line (SDL_Surface *s, int x0, int y0, int x1, int y1, Uint32 pixel) {
-    // Bruker Breshman's algoritme
+    // Bruker Bresenham's algoritme
     // http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
     int Dx = x1 - x0; 
