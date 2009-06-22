@@ -1,6 +1,10 @@
 Requirements:
  * SDL
  * SDL_ttf
+ * scons (to build on Linux, etc..)
+
+Building:
+ $ scons
 
 The font verdana.ttf in the execution folder.
 
