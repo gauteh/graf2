@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
+ *
  * sdlmisc.cpp:
  * Misc SDL helper functions
  *
@@ -80,6 +82,9 @@ Uint32 SDL_Item::get_color () {
 void draw_line (SDL_Surface *s, int x0, int y0, int x1, int y1, Uint32 pixel) {
     // Bruker Bresenham's algoritme
     // http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+    //
+    // Distributed under the CC-ShareAlike licence:
+    // http://creativecommons.org/licenses/by-sa/3.0/
 
     int Dx = x1 - x0; 
     int Dy = y1 - y0;

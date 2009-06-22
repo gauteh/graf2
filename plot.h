@@ -1,6 +1,5 @@
-/*
- * plot.h: Gfx and drawing of each plot
- */
+// Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
+// plot.h: Gfx and drawing of each plot
 
 # pragma once
 # include <SDL/SDL.h>

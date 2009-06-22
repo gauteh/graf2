@@ -1,6 +1,5 @@
-/*
- * main.cpp: Styrer 
- */
+// Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
+// main.cpp: Styrer 
 
 # include <iostream>
 # include <SDL/SDL.h>

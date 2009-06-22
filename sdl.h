@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
+ *
  * sdlmisc.h: Misc SDL helper functions
  *            SDL_Item class for common members and functions of sdl objects
  */

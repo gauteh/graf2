@@ -1,3 +1,4 @@
+// Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
 // text.cpp: sdl text objects
 
 # include <iostream>

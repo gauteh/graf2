@@ -1,3 +1,4 @@
+// Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
 // class for sdl text objects
 
 # pragma once

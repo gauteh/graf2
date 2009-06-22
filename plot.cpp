@@ -1,6 +1,5 @@
-/*
- * plot.cpp: Gfx and drawing of each point
- */
+// Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
+// plot.cpp: Gfx and drawing of each point
 
 # include <iostream>
 # include <iomanip>
