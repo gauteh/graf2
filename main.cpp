@@ -15,7 +15,7 @@ using namespace std;
 # ifndef BUILDTIME
     # define BUILDTIME "unknown"
 # endif
-# define VERSION "build-" BUILDTIME 
+# define VERSION "2-build-" BUILDTIME 
 
 int main () {
     cout << "Graf " << VERSION << endl;
