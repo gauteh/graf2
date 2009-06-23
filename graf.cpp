@@ -27,7 +27,10 @@ Graf::Graf (SDL_Surface *s, const char *f, int width, int height, int bpp) {
     SCREEN_BPP = bpp;
 
     filename = f;
-    if (!read ()) exit (1);
+    if (!read ()) {
+        cout << "Failed to read: " << filename  << "!" << endl;
+        exit (1);
+    }
 
     draw ();
     SDL_Flip (get_surface ());

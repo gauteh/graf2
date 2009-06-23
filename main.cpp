@@ -51,9 +51,12 @@ int main () {
     SDL_WM_SetCaption (title.data (), NULL);
 
         
-    Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP); // init and setup graf, this runs the main application
+    atexit (TTF_Quit);
+    atexit (SDL_Quit);
+    
+    // init and setup graf, this runs the main loop 
+    Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
 
-    TTF_Quit ();
-    SDL_Quit ();
+    exit (0);
     return 0;
 }
