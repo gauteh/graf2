@@ -11,7 +11,7 @@ env.Append (CXXFLAGS = "-DBUILDTIME=\\\"" + strftime ("%Y%m%d") + "\\\"")
 source_files = [
 	'main.cpp',
     'graf.cpp',
-    'sdl.cpp',
+    'sdlmisc.cpp',
     'plot.cpp',
     'axis.cpp',
     'text.cpp',

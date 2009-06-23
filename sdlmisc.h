@@ -6,7 +6,10 @@
  */
 
 # pragma once
-# include <SDL/SDL.h>
+
+# include <SDL.h>
+
+using namespace std;
 
 # define WHITE 0xFFFFFF
 # define BLACK 0x0
@@ -42,8 +45,8 @@ class SDL_Item {
         void set_screen (SDL_Surface *);
 
         bool is_active ();
-        bool toggle_active ();
-        bool set_active (bool);
+        void toggle_active ();
+        void set_active (bool);
 
         void set_color (Uint32);
         Uint32 get_color ();

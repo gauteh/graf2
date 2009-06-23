@@ -7,10 +7,15 @@
  * SDL_Item class, common members and functions of SDL objects
  */
 
-# include <iostream>
-# include <SDL/SDL.h>
+#ifdef WIN32
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#endif
 
-# include "sdl.h"
+# include <iostream>
+# include <SDL.h>
+
+# include "sdlmisc.h"
 
 using namespace std;
 
@@ -55,7 +60,7 @@ bool SDL_Item::is_active () {
     return active;
 }
 
-bool SDL_Item::toggle_active () {
+void SDL_Item::toggle_active () {
     if (active == true) {
         active = false;
     } else {
@@ -63,7 +68,7 @@ bool SDL_Item::toggle_active () {
     }
 }
 
-bool SDL_Item::set_active (bool on) {
+void SDL_Item::set_active (bool on) {
     active = on;
 }
 
@@ -141,7 +146,7 @@ void apply_surface (int x, int y, SDL_Surface *source, SDL_Surface *destination)
 
 void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
     Uint32 *pixels = (Uint32 *)surface->pixels;
-    if (y > surface->h || x > surface->w) {
+    if (y > (surface->h - 1) || x > (surface->w - 1)) {
         cout << "ERROR: put_pixel outside surface\n";
         cout << "Pixel:   [" << x << ", " << y << "]\n";
         cout << "Surface: [" << surface->w << ", " << surface->h << "]\n";
@@ -153,7 +158,7 @@ void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
         cout << "Pixel:   [" << x << ", " << y << "]\n";
         return;
     }
-    pixels[((surface->h - y) * surface->w) + x] = pixel;
+    pixels[((surface->h - y - 1) * surface->w) + x - 1] = pixel;
 }
 
 Uint32 get_pixel32 (SDL_Surface *surface, int x, int y) {
