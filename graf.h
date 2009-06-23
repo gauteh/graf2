@@ -3,10 +3,11 @@
  */
 
 # pragma once
-# include <string>
-# include <SDL/SDL.h>
 
-# include "sdl.h"
+# include <string>
+# include <SDL.h>
+
+# include "sdlmisc.h"
 # include "plot.h"
 # include "axis.h"
 

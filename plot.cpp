@@ -1,9 +1,14 @@
 // Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
 // plot.cpp: Gfx and drawing of each point
 
+#ifdef WIN32
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#endif
+
 # include <iostream>
 # include <iomanip>
-# include <SDL/SDL.h>
+# include <SDL.h>
 # include <vector>
 # include <cmath>
 

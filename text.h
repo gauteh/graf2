@@ -6,10 +6,10 @@
 # include <iostream>
 # include <string>
 
-# include <SDL/SDL.h>
+# include <SDL.h>
 # include <SDL_ttf.h>
 
-# include "sdl.h"
+# include "sdlmisc.h"
 
 using namespace std;
 

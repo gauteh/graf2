@@ -1,14 +1,20 @@
 // Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
 // text.cpp: sdl text objects
 
+#ifdef WIN32
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#pragma comment(lib, "SDL_ttf.lib")
+#endif
+
 # include <iostream>
 # include <string>
 
-# include <SDL/SDL.h>
-# include <SDL/SDL_ttf.h>
+# include <SDL.h>
+# include <SDL_ttf.h>
 
 # include "text.h"
-# include "sdl.h"
+# include "sdlmisc.h"
 
 Text::Text () {
     font = NULL;

@@ -1,9 +1,15 @@
 // Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
-// main.cpp: Styrer 
+// main.cpp
+
+#ifdef WIN32
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#pragma comment(lib, "SDL_ttf.lib")
+#endif
 
 # include <iostream>
-# include <SDL/SDL.h>
-# include <SDL/SDL_ttf.h>
+# include <SDL.h>
+# include <SDL_ttf.h>
 # include <string>
 # include <ctime>
 
@@ -16,7 +22,15 @@ using namespace std;
 # endif
 # define VERSION "2-build-" BUILDTIME 
 
-int main () {
+void myexit () {
+#ifdef WIN32
+	system ("pause");
+#endif
+}
+
+int main (int argc, char *argv[]) {
+	atexit (myexit);
+
     cout << "Graf " << VERSION << endl;
     cout << "Copyright (c) 2009 Gaute Hope <gaute.hope@stud.hib.no>" << endl;
 

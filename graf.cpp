@@ -3,13 +3,18 @@
  * graf.cpp: Klassa for oppsett og bakgrunn av graf
  */
 
-# include <SDL/SDL.h>
+#ifdef WIN32
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#endif
+
+# include <SDL.h>
 # include <iostream>
 # include <fstream>
 # include <string>
 # include <vector>
 
-# include "sdl.h"
+# include "sdlmisc.h"
 # include "graf.h"
 # include "axis.h"
 # include "text.h"

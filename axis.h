@@ -4,9 +4,9 @@
 # pragma once
 
 # include <string>
-# include <SDL/SDL.h>
+# include <SDL.h>
 
-# include "sdl.h"
+# include "sdlmisc.h"
 
 using namespace std;
 

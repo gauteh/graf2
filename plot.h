@@ -2,11 +2,12 @@
 // plot.h: Gfx and drawing of each plot
 
 # pragma once
-# include <SDL/SDL.h>
+
+# include <SDL.h>
 # include <string>
 # include <vector>
 
-# include "sdl.h"
+# include "sdlmisc.h"
 
 using namespace std;
 

@@ -1,12 +1,17 @@
 // Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
 // axis.cpp: implementer class Axis
 
-# include <SDL/SDL.h>
+#ifdef WIN32
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#endif
+
+# include <SDL.h>
 # include <string>
 # include <sstream>
 
 # include "axis.h"
-# include "sdl.h"
+# include "sdlmisc.h"
 # include "text.h"
 
 using namespace std;
