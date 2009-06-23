@@ -30,19 +30,21 @@ int main () {
 
     if (SDL_Init (SDL_INIT_EVERYTHING) == -1) {
         cout << "Failed to setup SDL!\n";
-        return 0;
+        exit (1);
     }
+    atexit (SDL_Quit);
 
     if (TTF_Init () == -1) {
         cout << "Failed to setup SDL_ttf!\n";
-        return 0;
+        exit (1);
     }
+    atexit (TTF_Quit);
 
     SDL_Surface *screen = NULL;
     screen = SDL_SetVideoMode (SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE|SDL_ANYFORMAT);
     if (screen == NULL) {
-        cout << "Failed to setup SDL!\n";
-        return 0;
+        cout << "Failed to setup SDL window!\n";
+        exit (1);
     }
 
     string title = "Graf " VERSION ": ";
@@ -50,13 +52,10 @@ int main () {
 
     SDL_WM_SetCaption (title.data (), NULL);
 
-        
-    atexit (TTF_Quit);
-    atexit (SDL_Quit);
-    
     // init and setup graf, this runs the main loop 
     Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
 
     exit (0);
+
     return 0;
 }
