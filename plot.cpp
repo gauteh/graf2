@@ -118,15 +118,15 @@ void Plot::draw () {
     int p_x = 0;
     int p_y = 0;
 
-    cout << "Draw plot [" << label << "]:" << endl;
-    cout << "Height: " << setw(3) << rect.h << endl;
-    cout << "Width:  " << setw(3) << rect.w << endl;
-    cout << "Points: " << setw(3) << points << ", scale_x: " << scale_x << endl;
-    cout << "             scale_y: " << scale_y << endl;
-    cout << "global_start: " << global_start << endl;
-    cout << "global_stop:  " << global_stop << endl;
-    cout << "Color: 0x" << hex << color << endl;
-    cout << dec;
+    //cout << "Draw plot [" << label << "]:" << endl;
+    //cout << "Height: " << setw(3) << rect.h << endl;
+    //cout << "Width:  " << setw(3) << rect.w << endl;
+    //cout << "Points: " << setw(3) << points << ", scale_x: " << scale_x << endl;
+    //cout << "             scale_y: " << scale_y << endl;
+    //cout << "global_start: " << global_start << endl;
+    //cout << "global_stop:  " << global_stop << endl;
+    //cout << "Color: 0x" << hex << color << endl;
+    //cout << dec;
     
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
         int myy = (*(i_y) - global_min) * scale_y;
