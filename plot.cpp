@@ -94,13 +94,23 @@ void Plot::set_global_max (float m) {
     global_max = m;
 }
 
+float Plot::get_global_start() { return global_start; }
+float Plot::get_global_stop() { return global_stop; }
+void Plot::set_global_start (float s) { global_start = s; };
+void Plot::set_global_stop (float s) { global_stop = s; };
+
+int Plot::get_point_middle () {
+    float scale_x = static_cast<float>(rect.w) / static_cast<float>(points);
+    return static_cast<int>((0 - global_start) * scale_x);
+}
+
 void Plot::draw () {
     setup_surface ();
 
     SDL_FillRect (surface, NULL, 0); // clear surface
 
-    float scale_x = static_cast<float>(rect.w) / static_cast<float>(points);
-    float scale_y = static_cast<float>(rect.h) / static_cast<float>(global_max - global_min);
+    float scale_x = static_cast<float>(rect.w) / (global_stop - global_start);
+    float scale_y = static_cast<float>(rect.h) / (global_max - global_min);
 
     int n_x = 0;
 
@@ -108,24 +118,26 @@ void Plot::draw () {
     int p_x = 0;
     int p_y = 0;
 
-    //cout << "Draw plot [" << label << "]:" << endl;
-    //cout << "Height: " << setw(3) << rect.h << endl;
-    //cout << "Width:  " << setw(3) << rect.w << endl;
-    //cout << "Points: " << setw(3) << points << ", scale_x: " << scale_x << endl;
-    //cout << "             scale_y: " << scale_y << endl;
-    //cout << "Color: 0x" << hex << color << endl;
+    cout << "Draw plot [" << label << "]:" << endl;
+    cout << "Height: " << setw(3) << rect.h << endl;
+    cout << "Width:  " << setw(3) << rect.w << endl;
+    cout << "Points: " << setw(3) << points << ", scale_x: " << scale_x << endl;
+    cout << "             scale_y: " << scale_y << endl;
+    cout << "global_start: " << global_start << endl;
+    cout << "global_stop:  " << global_stop << endl;
+    cout << "Color: 0x" << hex << color << endl;
+    cout << dec;
     
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
-        int y = (*(i_y) - global_min) * scale_y;
-        int x = static_cast<float>(n_x) * scale_x;
+        int myy = (*(i_y) - global_min) * scale_y;
+        int myx = (x.at(n_x) - global_start) * scale_x;
 
         //put_pixel32 (surface, x, y, WHITE);
 
-        if (p_x)
-            draw_line (surface, p_x, p_y, x, y, color);
+        if (p_x) draw_line (surface, p_x, p_y, myx, myy, color);
 
-        p_x = x;
-        p_y = y;
+        p_x = myx;
+        p_y = myy;
 
         n_x++;
 

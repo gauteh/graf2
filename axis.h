@@ -27,6 +27,7 @@ class Axis : public SDL_Item {
         void set_stop (float);
 
         void set_label (string s);
+        string get_label ();
         void set_direction (int);
         int get_direction ();
 
