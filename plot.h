@@ -20,8 +20,13 @@ class Plot : public SDL_Item {
         vector<float> x;
         vector<float> y;
 
+        // y-axis
         float global_min;
         float global_max;
+
+        // x-axis
+        float global_start;
+        float global_stop;
 
     public:
         Plot ();
@@ -41,7 +46,13 @@ class Plot : public SDL_Item {
 
         float get_global_min ();
         float get_global_max ();
-        int get_point_zero ();
+        int get_point_zero (); // point on screen where 0 on the y-axis is
+
+        float get_global_start ();
+        float get_global_stop ();
+        void set_global_start (float);
+        void set_global_stop (float);
+        int get_point_middle (); // point on screen where 0 on the x-axis is
 
         void set_index (int);
         int get_index ();

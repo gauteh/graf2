@@ -86,8 +86,8 @@ void Graf::draw () {
     // plots
     SDL_Rect r; 
     r.h = SCREEN_HEIGHT; 
-    r.w = SCREEN_WIDTH - 15; 
-    r.x = 15;
+    r.w = SCREEN_WIDTH; 
+    r.x = 0;
     r.y = 0; // horisontal aksa er på 30/2
 
     plot_a.set_rect (&r);
@@ -136,15 +136,18 @@ void Graf::draw () {
     SDL_Rect * ax_rect = axis_x.get_rect ();
     SDL_Rect * ay_rect = axis_y.get_rect ();
 
-    ax_rect->h = 30;
+    ax_rect->h = 50;
     ax_rect->w = SCREEN_WIDTH;
     ay_rect->h = SCREEN_HEIGHT;
-    ay_rect->w = 30;
+    ay_rect->w = 50;
 
     ax_rect->x = 0;
     ax_rect->y = plot_a.get_point_zero() - 15; 
-    ay_rect->x = 0;
+    if (ax_rect->y <= -15) ax_rect->y = -14;
+
     ay_rect->y = 0; 
+    ay_rect->x = plot_a.get_point_middle () - 15; 
+    if (ay_rect->x <= -15) ay_rect->x = -14;
 
     axis_x.set_screen (screen);
     axis_y.set_screen (screen);
@@ -154,7 +157,7 @@ void Graf::draw () {
 
     axis_x.draw ();
     axis_y.draw ();
-    
+
     apply_surface (axis_x.get_rect()->x, axis_x.get_rect()->y, axis_x.get_surface (), surface);
     apply_surface (axis_y.get_rect()->x, axis_y.get_rect()->y, axis_y.get_surface (), surface);
 
@@ -209,6 +212,14 @@ bool Graf::read () {
 
     plot_a.set_global_min (min);
     plot_b.set_global_min (min);
+
+    plot_a.set_global_start (t_start);
+    plot_b.set_global_start (t_start);
+    plot_a.set_global_stop (t);
+    plot_b.set_global_stop (t);
+
+    cout << "global_start: " << t_start << endl;
+    cout << "global_stop:  " << t << endl;
 
     // set up axis
     axis_y.set_direction (Axis::VERTICAL);
