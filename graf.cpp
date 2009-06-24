@@ -218,9 +218,6 @@ bool Graf::read () {
     plot_a.set_global_stop (t);
     plot_b.set_global_stop (t);
 
-    cout << "global_start: " << t_start << endl;
-    cout << "global_stop:  " << t << endl;
-
     // set up axis
     axis_y.set_direction (Axis::VERTICAL);
     axis_y.set_start (min);
