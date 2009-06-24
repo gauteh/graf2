@@ -187,9 +187,9 @@ bool Graf::read () {
 
     data.close ();
 
-    plot_a.set_label ("Vi");
+    plot_a.set_label ("V1");
     plot_a.set_index (0);
-    plot_b.set_label ("Vo");
+    plot_b.set_label ("V2");
     plot_b.set_index (1);
 
     // finn maks
