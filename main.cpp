@@ -20,7 +20,7 @@ using namespace std;
 # ifndef BUILDTIME
     # define BUILDTIME "unknown"
 # endif
-# define VERSION "2-build-" BUILDTIME 
+# define VERSION "2-build-" BUILDTIME
 
 void myexit () {
 #ifdef WIN32
@@ -66,10 +66,11 @@ int main (int argc, char *argv[]) {
 
     SDL_WM_SetCaption (title.data (), NULL);
 
-    // init and setup graf, this runs the main loop 
+    // init and setup graf, this runs the main loop
     Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
 
     exit (0);
 
     return 0;
 }
+

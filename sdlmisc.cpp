@@ -44,13 +44,13 @@ void SDL_Item::set_screen (SDL_Surface *s) {
 
 void SDL_Item::setup_surface () {
     if (surface == NULL) {
-        surface = SDL_CreateRGBSurface (SDL_SRCCOLORKEY, rect.w, rect.h, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);        
+        surface = SDL_CreateRGBSurface (SDL_SRCCOLORKEY, rect.w, rect.h, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);
         SDL_SetColorKey (surface, SDL_SRCCOLORKEY, 0x00);
     }
 }
 
 void SDL_Item::draw () {
-    // bør aldri bli kalla, gjer ingenting anna enn å sette opp 
+    // bør aldri bli kalla, gjer ingenting anna enn å sette opp
     // surface slik at det ikkje blir feil når den blir lagt på
     // skjermen
     setup_surface ();
@@ -91,7 +91,7 @@ void draw_line (SDL_Surface *s, int x0, int y0, int x1, int y1, Uint32 pixel) {
     // Distributed under the CC-ShareAlike licence:
     // http://creativecommons.org/licenses/by-sa/3.0/
 
-    int Dx = x1 - x0; 
+    int Dx = x1 - x0;
     int Dy = y1 - y0;
     int steep = (abs(Dy) >= abs(Dx));
     if (steep) {
@@ -108,19 +108,19 @@ void draw_line (SDL_Surface *s, int x0, int y0, int x1, int y1, Uint32 pixel) {
     }
     int ystep = 1;
     if (Dy < 0) {
-       ystep = -1;		
-       Dy = -Dy; 
+       ystep = -1;
+       Dy = -Dy;
     }
-    int TwoDy = 2*Dy; 
+    int TwoDy = 2*Dy;
     int TwoDyTwoDx = TwoDy - 2*Dx; // 2*Dy - 2*Dx
     int E = TwoDy - Dx; //2*Dy - Dx
     int y = y0;
-    int xDraw, yDraw;	
-    for (int x = x0; x != x1; x += xstep) {		
-       if (steep) {			
+    int xDraw, yDraw;
+    for (int x = x0; x != x1; x += xstep) {
+       if (steep) {
            xDraw = y;
            yDraw = x;
-       } else {			
+       } else {
            xDraw = x;
            yDraw = y;
        }

@@ -37,7 +37,7 @@ void Axis::set_label (string s) { label = s; }
 string Axis::get_label () { return label; }
 
 void Axis::draw () {
-    setup_surface (); 
+    setup_surface ();
     SDL_FillRect (surface, NULL, 0); // clear surface
 
     if (direction == VERTICAL) {
@@ -52,7 +52,6 @@ void Axis::draw () {
         // marks
         float scale_y = static_cast<float>(rect.h) / static_cast<float>(stop - start);
         int zero = (0 - start) * scale_y;
-    
 
         float inc_y = static_cast<float>(stop - start) / 20;
 
@@ -69,7 +68,7 @@ void Axis::draw () {
             Text t (no.str());
             t.set_size (10);
             t.draw ();
-            
+
             apply_surface (16, zero + i +1, t.get_surface (), surface);
 
             j++;
@@ -85,14 +84,14 @@ void Axis::draw () {
             Text t (no.str());
             t.set_size (10);
             t.draw ();
-            
+
             apply_surface (16, zero - i +1, t.get_surface (), surface);
 
             j--;
         }
 
 
-    } else if (direction == HORIZONTAL) { 
+    } else if (direction == HORIZONTAL) {
         // label
         Text t_label (label);
         t_label.set_size (13);
@@ -116,7 +115,7 @@ void Axis::draw () {
                 Text t (no.str());
                 t.set_size (10);
                 t.draw ();
-                
+
                 apply_surface (zero + i - (static_cast<float>(t.get_surface ()->w) / 2.0), 1, t.get_surface (), surface);
             }
 
@@ -134,7 +133,7 @@ void Axis::draw () {
                 Text t (no.str());
                 t.set_size (10);
                 t.draw ();
-                
+
                 apply_surface (zero - i - (static_cast<float>(t.get_surface ()->w) / 2.0), 1, t.get_surface (), surface);
             }
 

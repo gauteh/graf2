@@ -57,7 +57,7 @@ void Text::draw () {
     rect.w = surface->h;
     rect.h = surface->w;
 
-    if (font != NULL) 
+    if (font != NULL)
         TTF_CloseFont (font);
 }
 

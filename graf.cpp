@@ -39,8 +39,8 @@ Graf::Graf (SDL_Surface *s, const char *f, int width, int height, int bpp) {
 
     draw ();
     SDL_Flip (get_surface ());
-    
-    while (run ());
+
+    run ();
 }
 
 int Graf::run () {
@@ -75,7 +75,7 @@ int Graf::run () {
                 }
         }
     }
-    
+
     return 0;
 }
 
@@ -84,9 +84,9 @@ void Graf::draw () {
     SDL_FillRect (screen, NULL, color);
 
     // plots
-    SDL_Rect r; 
-    r.h = SCREEN_HEIGHT; 
-    r.w = SCREEN_WIDTH; 
+    SDL_Rect r;
+    r.h = SCREEN_HEIGHT;
+    r.w = SCREEN_WIDTH;
     r.x = 0;
     r.y = 0; // horisontal aksa er på 30/2
 
@@ -115,23 +115,23 @@ void Graf::draw () {
     Text l_b ("Plot b: " + plot_b.get_label ());
     l_b.set_color (plot_b.get_color());
     l_b.draw ();
-    
+
     int widest = 0;
     if (l_a.get_surface ()->w > l_b.get_surface ()->w) {
-        widest = l_a.get_surface ()->w;  
+        widest = l_a.get_surface ()->w;
     } else {
         widest = l_b.get_surface ()->w;
     }
     int hi = 0;
     if (l_a.get_surface ()->h > l_b.get_surface ()->h) {
-        hi = l_a.get_surface ()->h;  
+        hi = l_a.get_surface ()->h;
     } else {
         hi = l_b.get_surface ()->h;
     }
 
     apply_surface (screen->w - widest - 10, screen->h - hi - 10, l_a.get_surface(), screen);
     apply_surface (screen->w - widest - 10, screen->h - 2*(hi) - 10, l_b.get_surface(), screen);
-    
+
     // draw axis
     SDL_Rect * ax_rect = axis_x.get_rect ();
     SDL_Rect * ay_rect = axis_y.get_rect ();
@@ -142,11 +142,11 @@ void Graf::draw () {
     ay_rect->w = 50;
 
     ax_rect->x = 0;
-    ax_rect->y = plot_a.get_point_zero() - 15; 
+    ax_rect->y = plot_a.get_point_zero() - 15;
     if (ax_rect->y <= -15) ax_rect->y = -14;
 
-    ay_rect->y = 0; 
-    ay_rect->x = plot_a.get_point_middle () - 15; 
+    ay_rect->y = 0;
+    ay_rect->x = plot_a.get_point_middle () - 15;
     if (ay_rect->x <= -15) ay_rect->x = -14;
 
     axis_x.set_screen (screen);
@@ -169,7 +169,7 @@ bool Graf::read () {
     fstream data (filename, ios::in);
     if (!data) return false;
 
-    data.ignore (256, '\n'); // ignorer header for no 
+    data.ignore (256, '\n'); // ignorer header for no
 
     float t, x, y;
     int i = 0;
@@ -226,7 +226,7 @@ bool Graf::read () {
 
     axis_x.set_start (t_start);
     axis_x.set_stop (t);
-    axis_x.set_direction (Axis::HORIZONTAL); 
+    axis_x.set_direction (Axis::HORIZONTAL);
     axis_x.set_label ("tid (s)");
 
     return true;

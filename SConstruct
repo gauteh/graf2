@@ -1,7 +1,7 @@
 env = Environment ()
 
 env.ParseConfig ('pkg-config --cflags --libs sdl')
-		
+
 env.Append (LIBS = 'SDL_ttf')
 env.Append (CXXFLAGS = '-g')
 
