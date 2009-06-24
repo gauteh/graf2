@@ -127,7 +127,7 @@ void Plot::draw () {
     //cout << "global_stop:  " << global_stop << endl;
     //cout << "Color: 0x" << hex << color << endl;
     //cout << dec;
-    
+
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
         int myy = (*(i_y) - global_min) * scale_y;
         int myx = (x.at(n_x) - global_start) * scale_x;
