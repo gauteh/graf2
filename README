@@ -1,7 +1,9 @@
 Requirements:
- * SDL
- * SDL_ttf
+ * SDL (-devel to build)
+ * SDL_ttf (-devel to build)
  * scons (to build on Linux, etc..)
+
+See the graf2/ dir for Visual Studio 2008 project files.
 
 Building:
  $ scons
@@ -14,5 +16,5 @@ This project is licenced under the Creative Commons ShareAlike licence v 3.0:
 http://creativecommons.org/licenses/by-sa/3.0/no/
 http://creativecommons.org/licenses/by-sa/3.0/
 
-See COPYING
+See COPYING.
 
