@@ -90,7 +90,6 @@ void Axis::draw () {
             j--;
         }
 
-
     } else if (direction == HORIZONTAL) {
         // label
         Text t_label (label);
@@ -116,7 +115,7 @@ void Axis::draw () {
                 t.set_size (10);
                 t.draw ();
 
-                apply_surface (zero + i - static_cast<int>((static_cast<float>(t.get_surface ()->w) / 2.0)), 1, t.get_surface (), surface);
+                apply_surface (zero + i - static_cast<int>(static_cast<float>(t.get_surface ()->w) / 2.0), 1, t.get_surface (), surface);
             }
 
             j++;
@@ -134,13 +133,11 @@ void Axis::draw () {
                 t.set_size (10);
                 t.draw ();
 
-                apply_surface (zero - i - static_cast<int>((static_cast<float>(t.get_surface ()->w) / 2.0)), 1, t.get_surface (), surface);
+                apply_surface (zero - i - static_cast<int>(static_cast<float>(t.get_surface ()->w) / 2.0), 1, t.get_surface (), surface);
             }
 
             j--;
         }
-
-
     }
 }
 
@@ -149,4 +146,3 @@ void Axis::set_direction (int d) {
 }
 
 int Axis::get_direction () { return direction; }
-
