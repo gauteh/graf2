@@ -17,13 +17,13 @@ class Text : public SDL_Item {
     private:
         string text;
         TTF_Font *font;
-        float size;
+        int size;
     public:
         Text ();
         Text (string);
 
-        void set_size (float);
-        float get_size ();
+        void set_size (int);
+        int get_size ();
 
         void draw ();
 };

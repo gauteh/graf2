@@ -8,6 +8,7 @@
 #endif
 
 # include <iostream>
+# include <cstdlib>
 # include <string>
 
 # include <SDL.h>
@@ -28,17 +29,38 @@ Text::Text (string t) {
     size = 14;
 }
 
-void Text::set_size (float s) {
+void Text::set_size (int s) {
     size = s;
 }
 
-float Text::get_size () {
+int Text::get_size () {
     return size;
 }
 
 void Text::draw () {
+	string fonturi;
+# ifdef WIN32
+	char *pValue;
+	size_t len;
+	_dupenv_s (&pValue, &len, "SYSTEMROOT");
+
+	fonturi += pValue;
+	free (pValue);
+
+	fonturi += "\\Fonts\\";
+# else
+	// TODO: Dynamically open font on Linux, .. aswell
+	fonturi = "./";
+# endif
+
+	fonturi += "verdana.ttf";
+
     if (font == NULL)
-        font = TTF_OpenFont ("verdana.ttf", size);
+        font = TTF_OpenFont (fonturi.data(), size);
+	if (font == NULL) {
+		cout << "Failed to open font: " << fonturi << "!" << endl;
+		exit (1);
+	}
 
     SDL_Color c;
     c.r = color >> 16;
@@ -52,7 +74,7 @@ void Text::draw () {
 
     surface = TTF_RenderText_Shaded (font, text.data(), c, b);
     if (surface == NULL) {
-        cout << "Could not render text!\n" << TTF_GetError () << endl;
+		cout << "Could not render text: " << TTF_GetError () << endl;
     }
     rect.w = surface->h;
     rect.h = surface->w;
