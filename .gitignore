@@ -6,4 +6,5 @@ prepare
 verdana.ttf
 graf2/Debug
 graf2/graf2.vcproj.*
+dist/
 
