@@ -51,14 +51,14 @@ void Axis::draw () {
 
         // marks
         float scale_y = static_cast<float>(rect.h) / static_cast<float>(stop - start);
-        int zero = (0 - start) * scale_y;
+        int zero = static_cast<int>((0 - start) * scale_y);
 
         float inc_y = static_cast<float>(stop - start) / 20;
 
 
         int j = 0;
 
-        for (int i = 0; i + zero < rect.h; i += static_cast<float>(rect.h) / 20) {
+        for (int i = 0; i + zero < rect.h; i += static_cast<int>(static_cast<float>(rect.h) / 20)) {
             draw_line (surface, 15,  zero + i, rect.w, zero + i, color);
 
             ostringstream no;
@@ -75,7 +75,7 @@ void Axis::draw () {
         }
 
         j = 0;
-        for (int i = 0; zero - i  > 0; i += static_cast<float>(rect.h) / 20) {
+        for (int i = 0; zero - i  > 0; i += static_cast<int>(static_cast<float>(rect.h) / 20)) {
             draw_line (surface, 15,  zero - i, rect.w, zero - i, color);
             ostringstream no;
             float nof = j * inc_y;
@@ -100,11 +100,11 @@ void Axis::draw () {
 
         draw_line (surface, 0, 15, rect.w, 15, color);
         float scale_x = static_cast<float>(rect.w) / static_cast<float>(stop - start);
-        int zero = (0 - start) * scale_x;
+        int zero = static_cast<int>((0 - start) * scale_x);
         float inc_x = static_cast<float>(stop - start) / 20;
         int j = 0;
 
-        for (int i = 0; i + zero < rect.w; i += static_cast<float>(rect.w) / 20) {
+        for (int i = 0; i + zero < rect.w; i += static_cast<int>(static_cast<float>(rect.w) / 20)) {
             draw_line (surface, zero + i, 15, zero + i, 20, color);
 
             if (j) { // skip 0
@@ -116,13 +116,13 @@ void Axis::draw () {
                 t.set_size (10);
                 t.draw ();
 
-                apply_surface (zero + i - (static_cast<float>(t.get_surface ()->w) / 2.0), 1, t.get_surface (), surface);
+                apply_surface (zero + i - static_cast<int>((static_cast<float>(t.get_surface ()->w) / 2.0)), 1, t.get_surface (), surface);
             }
 
             j++;
         }
         j = 0;
-        for (int i = 0; zero - i  > 0; i += static_cast<float>(rect.w) / 20) {
+        for (int i = 0; zero - i  > 0; i += static_cast<int>(static_cast<float>(rect.w) / 20)) {
             draw_line (surface, zero - i, 15, zero - i, 20, color);
 
             if (j) { // skip 0
@@ -134,7 +134,7 @@ void Axis::draw () {
                 t.set_size (10);
                 t.draw ();
 
-                apply_surface (zero - i - (static_cast<float>(t.get_surface ()->w) / 2.0), 1, t.get_surface (), surface);
+                apply_surface (zero - i - static_cast<int>((static_cast<float>(t.get_surface ()->w) / 2.0)), 1, t.get_surface (), surface);
             }
 
             j--;

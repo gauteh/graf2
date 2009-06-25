@@ -86,7 +86,7 @@ float Plot::get_global_max () {
 int Plot::get_point_zero () {
     float scale_y = static_cast<float>(rect.h) / static_cast<float>(global_max - global_min);
 
-    int y = (0 - global_min) * scale_y;
+    int y = static_cast<int>((0 - global_min) * scale_y);
     return y;
 }
 
@@ -129,8 +129,8 @@ void Plot::draw () {
     //cout << dec;
 
     for (i_y = y.begin (); i_y != y.end (); i_y++) {
-        int myy = (*(i_y) - global_min) * scale_y;
-        int myx = (x.at(n_x) - global_start) * scale_x;
+        int myy = static_cast<int>((*(i_y) - global_min) * scale_y);
+        int myx = static_cast<int>((x.at(n_x) - global_start) * scale_x);
 
         //put_pixel32 (surface, x, y, WHITE);
 
