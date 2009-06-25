@@ -38,9 +38,6 @@ Graf::Graf (SDL_Surface *s, const char *f, int width, int height, int bpp) {
     }
 
     draw ();
-    SDL_Flip (get_surface ());
-
-    run ();
 }
 
 int Graf::run () {

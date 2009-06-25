@@ -68,9 +68,9 @@ int main (int argc, char *argv[]) {
 
     // init and setup graf, this runs the main loop
     Graf g (screen, filename, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    g.run ();
 
     exit (0);
-
     return 0;
 }
 
