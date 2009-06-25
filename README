@@ -1,3 +1,9 @@
+Usage:
+ Keys:
+    * a - toggle plot a
+    * b - toggle plot b
+    * q - quit
+
 Requirements:
  * SDL (-devel to build)
  * SDL_ttf (-devel to build)
