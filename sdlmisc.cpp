@@ -158,7 +158,7 @@ void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
         cout << "Pixel:   [" << x << ", " << y << "]\n";
         return;
     }
-    pixels[((surface->h - y - 1) * surface->w) + x - 1] = pixel;
+    pixels[((surface->h - y) * surface->w) + x] = pixel;
 }
 
 Uint32 get_pixel32 (SDL_Surface *surface, int x, int y) {
