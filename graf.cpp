@@ -37,7 +37,6 @@ Graf::Graf (SDL_Surface *s, const char *f, int width, int height, int bpp) {
         exit (1);
     }
 
-    draw ();
 }
 
 int Graf::run () {
@@ -46,6 +45,9 @@ int Graf::run () {
     int run = 1;
 
     while (run && SDL_WaitEvent (&event)) {
+
+        draw ();
+
         switch (event.type) {
             case SDL_QUIT:
                 cout << "Goodbye!\n";
@@ -62,12 +64,10 @@ int Graf::run () {
 
                     case SDLK_a:
                         plot_a.toggle_active ();
-                        draw ();
                         break;
 
                     case SDLK_b:
                         plot_b.toggle_active ();
-                        draw ();
                         break;
                 }
         }
