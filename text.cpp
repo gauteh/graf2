@@ -47,13 +47,25 @@ void Text::draw () {
 	fonturi += pValue;
 	free (pValue);
 
-	fonturi += "\\Fonts\\";
+	fonturi += "\\Fonts\\verdana.ttf";
 # else
-	// TODO: Dynamically open font on Linux, .. aswell
-	fonturi = "./";
+    // TODO: ^^ Proper define that catches Linux
+
+    fonturi = "/usr/share/fonts/TTF/verdana.ttf";
+    if (access (fonturi.data (), R_OK)) {
+        cout << "Failed to open system font: " << fonturi << ", trying local.." << endl;
+        if (access ("verdana.ttf", R_OK)) {
+            cout << "Could not open font verdana.ttf!" << endl
+                 << "It should either be located in:" << endl
+                 << "/usr/share/fonts/TTF/ or" << endl
+                 << "the local directory."  << endl;
+            exit (1);
+        } else {
+            fonturi = "./verdana.ttf";
+        }
+    }
 # endif
 
-	fonturi += "verdana.ttf";
 
     if (font == NULL)
         font = TTF_OpenFont (fonturi.data(), size);
