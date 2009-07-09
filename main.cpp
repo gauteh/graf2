@@ -18,7 +18,7 @@
 using namespace std;
 
 # ifdef BUILDTIME
-    # define BUILD "-build" - BUILDTIME 
+    # define BUILD "-build - " BUILDTIME 
 # else
     # define BUILD "-experimental"
 # endif
