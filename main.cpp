@@ -27,12 +27,12 @@ using namespace std;
 
 void myexit () {
 #ifdef WIN32
-	system ("pause");
+    system ("pause");
 #endif
 }
 
 int main (int argc, char *argv[]) {
-	atexit (myexit);
+    atexit (myexit);
 
     cout << "Graf " << VERSION << endl;
     cout << "Copyright (c) 2009 Gaute Hope <gaute.hope@stud.hib.no>" << endl;

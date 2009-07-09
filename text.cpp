@@ -38,16 +38,16 @@ int Text::get_size () {
 }
 
 void Text::draw () {
-	string fonturi;
+    string fonturi;
 # ifdef WIN32
-	char *pValue;
-	size_t len;
-	_dupenv_s (&pValue, &len, "SYSTEMROOT");
+    char *pValue;
+    size_t len;
+    _dupenv_s (&pValue, &len, "SYSTEMROOT");
 
-	fonturi += pValue;
-	free (pValue);
+    fonturi += pValue;
+    free (pValue);
 
-	fonturi += "\\Fonts\\verdana.ttf";
+    fonturi += "\\Fonts\\verdana.ttf";
 # else
     // TODO: ^^ Proper define that catches Linux
 
@@ -69,10 +69,10 @@ void Text::draw () {
 
     if (font == NULL)
         font = TTF_OpenFont (fonturi.data(), size);
-	if (font == NULL) {
-		cout << "Failed to open font: " << fonturi << "!" << endl;
-		exit (1);
-	}
+    if (font == NULL) {
+        cout << "Failed to open font: " << fonturi << "!" << endl;
+        exit (1);
+    }
 
     SDL_Color c;
     c.r = color >> 16;
@@ -86,7 +86,7 @@ void Text::draw () {
 
     surface = TTF_RenderText_Shaded (font, text.data(), c, b);
     if (surface == NULL) {
-		cout << "Could not render text: " << TTF_GetError () << endl;
+        cout << "Could not render text: " << TTF_GetError () << endl;
     }
     rect.w = surface->h;
     rect.h = surface->w;

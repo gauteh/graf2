@@ -50,7 +50,7 @@ int main () {
 
     lab.close ();
     graf.close ();
-	cout << "Behandling av LAB.DAT ferdig\n";
+    cout << "Behandling av LAB.DAT ferdig\n";
 
     return 0;
 }
