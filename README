@@ -1,26 +1,36 @@
 Usage:
- Keys:
+    Keys:
     * a - toggle plot a
     * b - toggle plot b
     * q - quit
 
 Requirements:
- * SDL (-devel to build)
- * SDL_ttf (-devel to build)
- * scons (to build on Linux, etc..)
+    * SDL (-devel to build)
+    * SDL_ttf (-devel to build)
 
-See the graf2/ dir for Visual Studio 2008 project files.
+    Linux:
+    * scons (for building)
 
-Building:
- $ scons
+Windows:
+    See the graf2/ subdir for Visual Studio 2008 project files.
 
 Linux:
- The font verdana.ttf in the execution folder.
+    If the system font verdana.ttf is not located in /usr/share/fonts/TTF
+    graf searches for it in the local directory.
 
-Distribution:
-This project is licenced under the Creative Commons ShareAlike licence v 3.0:
+    Building:
+    $ scons
 
-http://creativecommons.org/licenses/by-sa/3.0/no/
-http://creativecommons.org/licenses/by-sa/3.0/
 
-See COPYING.
+Distribution: 
+    This project is licenced under the Creative Commons
+    ShareAlike licence v 3.0:
+
+    http://creativecommons.org/licenses/by-sa/3.0/no/
+    http://creativecommons.org/licenses/by-sa/3.0/
+
+    See COPYING.
+
+Contact:
+    Gaute Hope <eg@gaute.vetsj.com>
+
