@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2009 Gaute Hope <eg@gaute.vetsj.com>
  *
- * Fil: oo8_LabGraf.cpp
+ * Fil: prepare_data.cpp
  * Versjon: 1
  * Kommentar: Behandler data fra fila LAB.DAT og skriv ut resultatet i GRAF.DAT
  */
