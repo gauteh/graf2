@@ -1,4 +1,9 @@
+import os
+
 env = Environment ()
+
+env.Append (CXXFLAGS = "-D" + os.uname()[0])
+print "Building for: " + os.uname ()[0]
 
 env.ParseConfig ('pkg-config --cflags --libs sdl')
 

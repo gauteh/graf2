@@ -48,9 +48,8 @@ void Text::draw () {
     free (pValue);
 
     fonturi += "\\Fonts\\verdana.ttf";
-# else
-    // TODO: ^^ Proper define that catches Linux
 
+# elif Linux
     fonturi = "/usr/share/fonts/TTF/verdana.ttf";
     if (access (fonturi.data (), R_OK)) {
         cout << "Failed to open system font: " << fonturi << ", trying local.." << endl;
@@ -64,6 +63,10 @@ void Text::draw () {
             fonturi = "./verdana.ttf";
         }
     }
+
+# else
+    // default
+    fonturi = "./verdana.ttf";
 # endif
 
 
