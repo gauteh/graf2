@@ -146,6 +146,8 @@ void apply_surface (int x, int y, SDL_Surface *source, SDL_Surface *destination)
 
 void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
     Uint32 *pixels = (Uint32 *)surface->pixels;
+
+    // indikerar feil ein annan stad:
     if (y > surface->h || x > surface->w) {
         cout << "ERROR: put_pixel outside surface\n";
         cout << "Pixel:   [" << x << ", " << y << "]\n";
@@ -158,6 +160,7 @@ void put_pixel32 (SDL_Surface *surface, int x, int y, Uint32 pixel) {
         cout << "Pixel:   [" << x << ", " << y << "]\n";
         return;
     }
+
     pixels[((surface->h - y) * surface->w) + x] = pixel;
 }
 

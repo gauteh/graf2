@@ -25,13 +25,8 @@ Plot::Plot () {
     color = rand () % 0xFFFFFF;
 }
 
-void Plot::set_label (string s) {
-    label = s;
-}
-
-string Plot::get_label () {
-    return label;
-}
+void Plot::set_label (string s) { label = s; }
+string Plot::get_label () { return label; }
 
 int Plot::get_points () { return points; }
 vector<float> Plot::get_x () { return x; }
@@ -43,13 +38,8 @@ void Plot::add_point (float _x, float _y) {
    points++;
 }
 
-void Plot::set_index (int i) {
-    index = i;
-}
-
-int Plot::get_index () {
-    return index;
-}
+void Plot::set_index (int i) { index = i; }
+int Plot::get_index () { return index; }
 
 float Plot::get_max () {
     float max = y[0];
@@ -71,27 +61,17 @@ float Plot::get_min () {
     return min;
 }
 
-void Plot::set_global_min (float m) {
-    global_min = m;
-}
+void Plot::set_global_max (float m) { global_max = m; }
+void Plot::set_global_min (float m) { global_min = m; }
 
-float Plot::get_global_min () {
-    return global_min;
-}
-
-float Plot::get_global_max () {
-    return global_max;
-}
+float Plot::get_global_min () { return global_min; }
+float Plot::get_global_max () { return global_max; }
 
 int Plot::get_point_zero () {
     float scale_y = static_cast<float>(rect.h) / static_cast<float>(global_max - global_min);
 
     int y = static_cast<int>((0 - global_min) * scale_y);
     return y;
-}
-
-void Plot::set_global_max (float m) {
-    global_max = m;
 }
 
 float Plot::get_global_start() { return global_start; }
