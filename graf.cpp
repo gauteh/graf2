@@ -166,7 +166,7 @@ bool Graf::read () {
     fstream data (filename, ios::in);
     if (!data) return false;
 
-    data.ignore (256, '\n'); // ignorer header for no
+    data.ignore (256, '\n'); // ignorer header for now
 
     float t, x, y;
     int i = 0;
