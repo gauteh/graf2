@@ -45,9 +45,6 @@ int Graf::run () {
     int run = 1;
 
     while (run && SDL_WaitEvent (&event)) {
-
-        draw ();
-
         switch (event.type) {
             case SDL_QUIT:
                 cout << "Goodbye!\n";
@@ -71,6 +68,9 @@ int Graf::run () {
                         break;
                 }
         }
+
+        draw ();
+
     }
 
     return 0;
