@@ -10,9 +10,6 @@ env.ParseConfig ('pkg-config --cflags --libs sdl')
 env.Append (LIBS = 'SDL_ttf')
 env.Append (CXXFLAGS = '-g') # debug
 
-from time import strftime
-env.Append (CXXFLAGS = "-DBUILDTIME=\\\"" + strftime ("%Y%m%d") + "\\\"")
-
 source_files = [
     'main.cpp',
     'graf.cpp',

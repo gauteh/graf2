@@ -17,13 +17,7 @@
 
 using namespace std;
 
-# ifdef BUILDTIME
-    # define BUILD "-build - " BUILDTIME 
-# else
-    # define BUILD "-experimental"
-# endif
-
-# define VERSION "2" BUILD
+# define VERSION "2 - 0.2 (beta)"
 
 void myexit () {
 #ifdef WIN32
